@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ReactNode } from "react";
 
-type MotionButton = {
+type MotionButtonT = {
   content?: string | ReactNode;
   variant?:
     | "link"
@@ -22,7 +22,7 @@ export function MotionButton({
   variant,
   style,
   onClick,
-}: MotionButton) {
+}: MotionButtonT) {
   return (
     <motion.div whileTap={{ scale: 0.8, rotate: "2deg" }}>
       <Button variant={variant} className={style} onClick={onClick}>

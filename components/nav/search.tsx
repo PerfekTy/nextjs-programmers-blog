@@ -3,10 +3,10 @@ import { Input } from "@/components/ui/input";
 
 export function SearchField() {
   return (
-    <form className="w-full mt-10 md:mt-0">
-      <fieldset className="flex relative items-center mx-2">
+    <form className="w-full">
+      <fieldset className="flex relative items-center mx-5">
         <Search className="absolute left-2" />
-        <Input className="pl-10" />
+        <Input className="pl-10 py-5" />
       </fieldset>
     </form>
   );
