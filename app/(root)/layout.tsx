@@ -3,11 +3,11 @@ import Navbar from "@/components/nav/navbar";
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <main className="flex flex-col justify-center xl:mx-[20%]">
+      <main className="flex flex-col justify-center">
         <nav>
           <Navbar />
         </nav>
-        <article className="flex justify-center border border-red-500 h-screen">
+        <article className="flex justify-center h-screen xl:mx-[20%] mt-10 md:mt-0">
           <section className="border w-[350px] hidden justify-center">
             LEFT SIDE
           </section>

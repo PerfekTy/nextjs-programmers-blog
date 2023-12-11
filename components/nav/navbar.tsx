@@ -1,31 +1,54 @@
-import Logo from "@/components/nav/logo";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Search } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+
+import { Logo } from "@/components/nav/logo";
+import { MotionButton } from "@/components/ui/motion-button";
+import { SearchField } from "@/components/nav/search";
+
+import { SearchIcon } from "lucide-react";
 import { ToggleTheme } from "@/components/ui/toggle-theme";
-import LoginButton from "@/components/ui/login-button";
 
 export default function Navbar() {
+  const [isSearch, setIsSearch] = useState(false);
+
   return (
-    <div className="flex flex-col items-center justify-center my-5 gap-5">
-      <div>
-        <Logo />
-      </div>
-      <div className="flex items-center justify-center w-full relative">
-        <form action="" className="w-full md:w-1/2">
-          <fieldset className="relative">
-            <Search className="absolute left-2 top-[6px]" />
-            <Input
-              type="text"
-              className="pl-10 focus-visible:ring border border-[#222] border-opacity-30 dark:border-opacity-100"
-            />
-          </fieldset>
-        </form>
-        <div className="items-center gap-5 absolute right-0 md:flex hidden">
-          <LoginButton />
-          <ToggleTheme />
+    <div className="flex flex-col items-center justify-center mt-5 mb-3 gap-5">
+      <Logo />
+      <div className="flex gap-5 items-center justify-end md:justify-center w-full md:mr-0">
+        <div className="hidden md:block w-1/2">
+          <SearchField />
+        </div>
+        <div className="items-center gap-5 flex absolute right-5 mt-10 md:mt-0">
+          <MotionButton
+            content={<SearchIcon />}
+            variant="ghost"
+            onClick={() => setIsSearch(!isSearch)}
+            style={`${
+              isSearch && "dark:bg-button_active bg-button_active2"
+            } p-2 border md:hidden`}
+          />
+          <MotionButton
+            content="Sign up"
+            variant="secondary"
+            style="px-4 h-[2.4rem]"
+          />
+          <MotionButton
+            content="Login"
+            variant="default"
+            style="px-4 h-[2.2rem]"
+          />
         </div>
       </div>
+      <motion.div
+        initial={{ y: isSearch ? -50 : 0 }}
+        whileInView={{ y: isSearch ? 0 : -50 }}
+        className="w-full"
+      >
+        {isSearch && <SearchField />}
+      </motion.div>
+      <ToggleTheme />
     </div>
   );
 }

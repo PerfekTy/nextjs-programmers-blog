@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-export default function Logo() {
+export function Logo() {
   return (
     <div className="flex items-center justify-center gap-3">
       <Image
@@ -11,7 +11,7 @@ export default function Logo() {
         alt="icon logo of programmers-blog"
         width={30}
         height={30}
-        className="dark:block hidden w-10"
+        className="dark:block hidden w-8"
       />
       <motion.div
         initial={{ y: -70 }}
@@ -31,7 +31,7 @@ export default function Logo() {
         alt="programmers-blog logo"
         width={30}
         height={30}
-        className="dark:hidden block w-10"
+        className="dark:hidden block w-8"
       />
       <motion.div
         initial={{ y: -70 }}
