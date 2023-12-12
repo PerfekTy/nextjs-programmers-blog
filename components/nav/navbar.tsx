@@ -18,9 +18,9 @@ export default function Navbar({
   const [isSearch, setIsSearch] = useState(false);
 
   return (
-    <div className="flex flex-col items-center justify-center mt-5 mb-3 gap-5">
+    <div className="flex flex-col items-center justify-center mt-5 mb-3 gap-5 border-b">
       <Logo />
-      <div className="flex items-center justify-center w-full md:mr-0 mt-3">
+      <div className="flex items-center justify-center w-full md:mr-0 my-3">
         <div className="flex items-center">
           <div className="md:hidden" onClick={() => setIsMobile(!isMobile)}>
             <Spin size={25} duration={0.5} toggled={isMobile} />
@@ -34,7 +34,7 @@ export default function Navbar({
             } p-2 border md:hidden mx-2`}
           />
         </div>
-        <div className="hidden md:block w-1/2">
+        <div className="hidden md:block w-[40%]">
           <SearchField />
         </div>
         <div className="flex gap-5 ml-auto md:ml-0 mx-5">
