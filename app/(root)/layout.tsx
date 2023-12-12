@@ -1,18 +1,18 @@
-import SidebarLeft from "@/components/left-sidebar/sidebar_left";
+import Navbar from "@/components/nav/navbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <main className="flex flex-col justify-center border-4 mx-[300px]">
-        <nav className="flex justify-center w-full border border-blue-400">
-          NAVBAR
+      <main className="flex flex-col justify-center">
+        <nav>
+          <Navbar />
         </nav>
-        <article className="flex justify-center border border-red-500 h-screen">
-          <section className="w-[350px]">
-            <SidebarLeft />
+        <article className="flex justify-center h-screen xl:mx-[20%] mt-10 md:mt-0">
+          <section className="border w-[350px] hidden justify-center">
+            LEFT SIDE
           </section>
           <article className="w-full flex justify-center">{children}</article>
-          <section className="border w-[350px] flex justify-center">
+          <section className="border w-[350px] hidden justify-center">
             RIGHT SIDE
           </section>
         </article>
