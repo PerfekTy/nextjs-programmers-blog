@@ -4,6 +4,7 @@ import { useState } from "react";
 import Navbar from "@/components/nav/navbar";
 import { Spin } from "hamburger-react";
 import { AnimatePresence, motion } from "framer-motion";
+import SidebarLeft from "@/components/left-sidebar/sidebar_left";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMobile, setIsMobile] = useState(false);
@@ -32,7 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </div>
               </motion.section>
             ) : (
-              <>LEFT SIDE</>
+              <SidebarLeft/>
             )}
           </AnimatePresence>
           <article className="w-full flex justify-center">{children}</article>
