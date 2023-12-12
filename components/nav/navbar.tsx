@@ -1,17 +1,20 @@
-"use client";
-
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { Logo } from "@/components/nav/logo";
 import { MotionButton } from "@/components/ui/motion-button";
 import { SearchField } from "@/components/nav/search";
 
 import { SearchIcon } from "lucide-react";
-import { ToggleTheme } from "@/components/ui/toggle-theme";
 import { Spin } from "hamburger-react";
 
-export default function Navbar() {
+export default function Navbar({
+  isMobile,
+  setIsMobile,
+}: {
+  isMobile: boolean;
+  setIsMobile: (isMobile: boolean) => void;
+}) {
   const [isSearch, setIsSearch] = useState(false);
 
   return (
@@ -19,8 +22,8 @@ export default function Navbar() {
       <Logo />
       <div className="flex items-center justify-center w-full md:mr-0 mt-3">
         <div className="flex items-center">
-          <div className="md:hidden">
-            <Spin size={25} duration={0.5} />
+          <div className="md:hidden" onClick={() => setIsMobile(!isMobile)}>
+            <Spin size={25} duration={0.5} toggled={isMobile} />
           </div>
           <MotionButton
             content={<SearchIcon />}
@@ -47,14 +50,19 @@ export default function Navbar() {
           />
         </div>
       </div>
-      <motion.div
-        initial={{ y: isSearch ? -50 : 0 }}
-        whileInView={{ y: isSearch ? 0 : -50 }}
-        className="w-full"
-      >
-        {isSearch && <SearchField />}
-      </motion.div>
-      <ToggleTheme />
+      <AnimatePresence>
+        {isSearch && (
+          <motion.div
+            initial={{ y: -50 }}
+            animate={{ y: 0 }}
+            exit={{ y: -50 }}
+            transition={{ type: "just", ease: "easeInOut", duration: 0.1 }}
+            className="w-full"
+          >
+            {isSearch && <SearchField />}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
