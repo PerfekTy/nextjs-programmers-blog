@@ -24,12 +24,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <article className="w-full flex justify-center mt-10">
             {children}
           </article>
-          <section className="border w-[350px] justify-center lg:block hidden">
-            RIGHT SIDE
+          <section className="border-l w-[350px] justify-center lg:block hidden">
+            Right
           </section>
         </article>
-        <ToggleTheme />
-        <footer className="w-full flex justify-center">FOOTER</footer>
+        <footer className="w-full flex justify-center border">
+          <ToggleTheme />
+        </footer>
       </main>
     </>
   );

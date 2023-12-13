@@ -37,14 +37,14 @@ export function Navbar({
             } p-2 border md:hidden mx-2`}
           />
         </div>
-        <div className="hidden md:block w-full">
+        <div className="hidden md:block w-full md:ml-5 xl:ml-0">
           <SearchField />
         </div>
-        <div className="flex gap-5 items-center ml-auto mr-5 md:ml-0 md:mr-0">
+        <div className="flex gap-5 items-center ml-auto mr-5 md:ml-0 md:mr-5 xl:mr-0">
           <MotionButton
             content="Sign up"
             variant="secondary"
-            style="px-4 dark:h-[2.5rem] h-[2.2rem] dark:bg-black"
+            style="px-4 h-[2.2rem] dark:bg-black"
           />
           <MotionButton
             content="Login"
