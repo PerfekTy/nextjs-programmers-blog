@@ -3,9 +3,9 @@
 import React, { useState } from "react";
 
 import { Navbar } from "@/components/nav/navbar";
-import { LeftSidebar } from "@/components/left-sidebar/left-sidebar";
+import { LeftSidebar } from "@/components/sidebar/left/left-sidebar";
 import { ToggleTheme } from "@/components/ui/toggle-theme";
-import { LeftSidebarMobile } from "@/components/left-sidebar/left-sidebar-mobile";
+import { LeftSidebarMobile } from "@/components/sidebar/left/left-sidebar-mobile";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [isMobile, setIsMobile] = useState(false);
@@ -18,12 +18,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </nav>
         <article className="flex justify-center h-screen 2xl:mx-[20%] md:mt-0">
           <LeftSidebarMobile setIsMobile={setIsMobile} isMobile={isMobile} />
-          <div className="hidden md:block border-r">
+          <div className="hidden md:block border-r dark:border-none">
             <LeftSidebar />
           </div>
-          <article className="w-full flex justify-center mt-10">
-            {children}
-          </article>
+          <article className="w-full m-2">{children}</article>
           <section className="border-l w-[350px] justify-center lg:block hidden">
             Right
           </section>

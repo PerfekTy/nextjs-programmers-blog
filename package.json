@@ -18,6 +18,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "date-fns": "^2.30.0",
     "drizzle-orm": "^0.29.1",
     "framer-motion": "^10.16.16",
     "hamburger-react": "^2.5.0",
