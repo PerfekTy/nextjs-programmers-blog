@@ -20,7 +20,7 @@ export function LeftSidebarMobile({
           animate={{ x: 0 }}
           exit={{ x: -300 }}
           transition={{ type: "just", ease: "easeInOut" }}
-          className="fixed left-0 top-0 h-screen w-[300px] dark:bg-sidebar bg-white border-r"
+          className="fixed left-0 top-0 h-screen w-[300px] dark:bg-sidebar bg-white border-r z-50"
         >
           <div className="flex justify-between md:hidden items-center">
             <h1 className={`${unicaOne.className} text-center ml-4 text-2xl`}>

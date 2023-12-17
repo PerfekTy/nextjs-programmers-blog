@@ -36,10 +36,8 @@ export const ArticleItem = ({ article }: { article: Article }) => {
           <h1 className="text-3xl font-bold hover:dark:text-button_text hover:text-button_active">
             {article.title}
           </h1>
-          {/*  TAGS */}
           <span className="flex gap-5 text-sm text-muted-foreground">
-            <p className="cursor-pointer">#js</p>
-            <p className="cursor-pointer">#react</p>
+            <p className="cursor-pointer">{article.tags}</p>
           </span>
           <text className={`${montserrat.className} line-clamp-3 text-[15px]`}>
             {article.text}

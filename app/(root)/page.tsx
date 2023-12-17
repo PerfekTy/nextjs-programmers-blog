@@ -1,15 +1,15 @@
-import { getAllArticles } from "@/app/(root)/actions";
+import { getArticlesAction } from "@/app/(root)/actions";
 
-import { Categories } from "@/components/articles/categories";
 import { ArticleList } from "@/components/articles/article-list";
+import { Categories } from "@/components/articles/categories";
 
 export default async function Page() {
-  const articles = await getAllArticles();
+  const articles = await getArticlesAction();
 
   return (
-    <div>
+    <>
       <Categories />
       <ArticleList articles={articles} />
-    </div>
+    </>
   );
 }

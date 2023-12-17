@@ -6,6 +6,7 @@ export const articles = pgTable("articles", {
   title: varchar("title").notNull(),
   text: varchar("text").notNull(),
   author: varchar("author").notNull(),
+  tags: varchar("tags").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
