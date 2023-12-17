@@ -9,12 +9,12 @@ export const ArticleItem = ({ article }: { article: Article }) => {
     return;
   }
 
-  const createdAt = article.createdAt.toLocaleString("EN-us", {
-    day: "numeric",
-    month: "short",
+  const createdAt = new Date(article.createdAt).toLocaleString("en-US", {
+    month: "long",
+    day: "2-digit",
   });
 
-  const formatDistance = formatDistanceToNow(article.createdAt, {
+  const formatDistance = formatDistanceToNow(new Date(article.createdAt), {
     addSuffix: true,
     includeSeconds: true,
   });
