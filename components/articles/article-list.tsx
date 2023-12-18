@@ -6,6 +6,7 @@ import { Article } from "@/db/schema";
 
 import { ArticleItem } from "@/components/articles/article-item";
 import { MotionButton } from "@/components/ui/motion-button";
+import { ArticleItemSkeleton } from "@/components/skeletons/article-item-skeleton";
 
 export const ArticleList = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -15,22 +16,33 @@ export const ArticleList = () => {
     sortLatest: "",
     sortOldest: "",
   });
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingSkeletonCount] = useState(3);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    const { data } = await axios.post("/api/articles", {
-      latest: isCategorized.sortLatest,
-      oldest: isCategorized.sortOldest,
-    });
-
-    setArticles(data);
+    try {
+      const { data } = await axios.post("/api/articles", {
+        latest: isCategorized.sortLatest,
+        oldest: isCategorized.sortOldest,
+      });
+      setArticles(data);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
     const fetchArticles = async () => {
-      const { data } = await axios.get("/api/articles");
-      setArticles(data);
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get("/api/articles");
+        setArticles(data);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
     fetchArticles();
@@ -74,8 +86,13 @@ export const ArticleList = () => {
           }
         />
       </form>
-      {articles?.map((article) => (
-        <ArticleItem key={article.id} article={article} />
+      {isLoading &&
+        Array.from({ length: loadingSkeletonCount }).map((_, key) => (
+          <ArticleItemSkeleton key={key} />
+        ))}
+
+      {articles.map((article) => (
+        <ArticleItem article={article} key={article.id} />
       ))}
     </>
   );
