@@ -6,7 +6,8 @@ import { Article } from "@/db/schema";
 
 import { ArticleItem } from "@/components/articles/article-item";
 import { MotionButton } from "@/components/ui/motion-button";
-import { ArticleItemSkeleton } from "@/components/skeletons/article-item-skeleton";
+import { ArticleItemSkeleton } from "@/components/skeletons";
+import { BeatLoader } from "react-spinners";
 
 export const ArticleList = () => {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -17,11 +18,13 @@ export const ArticleList = () => {
     sortOldest: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isCategorizedLoading, setIsCategorizedLoading] = useState(false);
   const [loadingSkeletonCount] = useState(4);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
+      setIsCategorizedLoading(true);
       const { data } = await axios.post("/api/articles", {
         latest: isCategorized.sortLatest,
         oldest: isCategorized.sortOldest,
@@ -29,6 +32,8 @@ export const ArticleList = () => {
       setArticles(data);
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsCategorizedLoading(false);
     }
   };
 
@@ -90,6 +95,17 @@ export const ArticleList = () => {
         Array.from({ length: loadingSkeletonCount }).map((_, key) => (
           <ArticleItemSkeleton key={key} />
         ))}
+
+      {isCategorizedLoading && (
+        <>
+          <div className="justify-center w-full flex dark:hidden m-2">
+            <BeatLoader size={20} color="black" />
+          </div>
+          <div className="justify-center w-full dark:flex hidden m-2">
+            <BeatLoader size={20} color="white" />
+          </div>
+        </>
+      )}
 
       {articles.map((article) => (
         <ArticleItem article={article} key={article.id} />

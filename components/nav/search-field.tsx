@@ -20,7 +20,7 @@ export function SearchField() {
       <fieldset className="flex flex-col relative items-center mx-5 mb-4 md:mb-0 md:mr-5 md:ml-0">
         <Search className="absolute left-3 top-2" />
         {state.errors.message && (
-          <Label className="absolute top-[15px] right-5 font-bold text-red-400">
+          <Label className="absolute md:top-[15px] -top-5 right-5 font-bold text-red-400">
             {state.errors.message}
           </Label>
         )}
