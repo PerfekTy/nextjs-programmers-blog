@@ -17,7 +17,7 @@ export const ArticleList = () => {
     sortOldest: "",
   });
   const [isLoading, setIsLoading] = useState(false);
-  const [loadingSkeletonCount] = useState(3);
+  const [loadingSkeletonCount] = useState(4);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();

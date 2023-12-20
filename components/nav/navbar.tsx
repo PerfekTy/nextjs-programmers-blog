@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { Logo } from "@/components/nav/logo";
 import { MotionButton } from "@/components/ui/motion-button";
-import { SearchField } from "@/components/nav/search";
+import { SearchField } from "@/components/nav/search-field";
 
 import { SearchIcon } from "lucide-react";
 import { Spin } from "hamburger-react";
