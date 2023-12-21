@@ -14,10 +14,21 @@ export const ArticleItem = ({ article }: { article: Article }) => {
     day: "2-digit",
   });
 
-  const formatDistance = formatDistanceToNow(new Date(article.createdAt), {
-    addSuffix: true,
-    includeSeconds: true,
-  });
+  const formatDistanceCreatedAt = formatDistanceToNow(
+    new Date(article.createdAt),
+    {
+      addSuffix: true,
+      includeSeconds: true,
+    },
+  );
+
+  const formatDistanceUpdatedAt = formatDistanceToNow(
+    new Date(article.createdAt),
+    {
+      addSuffix: true,
+      includeSeconds: true,
+    },
+  );
 
   return (
     <div className="m-3 cursor-pointer rounded-lg shadow">
@@ -25,12 +36,12 @@ export const ArticleItem = ({ article }: { article: Article }) => {
         <div className="flex items-center gap-3 px-5 py-3">
           {/* Avatar */}
           <Avatar src={"/us.jpg"} />
-          <span>
+          <div>
             <p className="cursor-pointer">{article.author}</p>
             <p className="text-muted-foreground text-sm">
-              {createdAt} ({formatDistance})
+              {createdAt} ({formatDistanceCreatedAt})
             </p>
-          </span>
+          </div>
         </div>
         <div className="px-16 pb-3 flex flex-col gap-3">
           <h1 className="text-3xl font-bold hover:dark:text-button_text hover:text-button_active">

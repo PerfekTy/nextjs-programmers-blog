@@ -62,7 +62,7 @@ export function Navbar({
             transition={{ type: "just", ease: "easeInOut", duration: 0.1 }}
             className="w-full"
           >
-            {isSearch && <SearchField />}
+            <SearchField />
           </motion.div>
         )}
       </AnimatePresence>

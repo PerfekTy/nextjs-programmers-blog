@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <nav>
           <Navbar setIsMobile={setIsMobile} isMobile={isMobile} />
         </nav>
-        <article className="flex justify-center h-screen 2xl:mx-[20%] md:mt-0">
+        <article className="flex justify-center 2xl:mx-[20%] md:mt-0">
           <LeftSidebarMobile setIsMobile={setIsMobile} isMobile={isMobile} />
           <div className="hidden md:block border-r dark:border-none">
             <LeftSidebar />

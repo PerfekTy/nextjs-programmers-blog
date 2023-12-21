@@ -1,29 +1,29 @@
 import { useFormState } from "react-dom";
+import { useDispatch } from "react-redux";
 import { Search } from "lucide-react";
 
 import { FormState, searchDataAction } from "@/app/(root)/actions";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { useEffect } from "react";
+import { setArticles } from "@/redux/slices/articles-slice";
 
 export function SearchField() {
-  const [state, dispatch] = useFormState(searchDataAction, {
+  // TODO: fix data: [], should be null of undefined
+  const dispatch = useDispatch();
+  const [state, dispatchAction] = useFormState(searchDataAction, {
     searchedValue: "",
-    errors: {
-      message: undefined,
-    },
-    data: undefined,
+    data: [],
   } as FormState);
 
+  useEffect(() => {
+    dispatch(setArticles(state.data));
+  }, [dispatch, state.data]);
+
   return (
-    <form className="w-full" action={dispatch}>
+    <form className="w-full" action={dispatchAction}>
       <fieldset className="flex flex-col relative items-center mx-5 mb-4 md:mb-0 md:mr-5 md:ml-0">
         <Search className="absolute left-3 top-2" />
-        {state.errors.message && (
-          <Label className="absolute md:top-[15px] -top-5 right-5 font-bold text-red-400">
-            {state.errors.message}
-          </Label>
-        )}
         <Input
           className="pl-10 py-5 dark:bg-black shadow"
           name="searchedValue"
