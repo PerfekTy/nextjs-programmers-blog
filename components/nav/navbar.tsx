@@ -50,11 +50,9 @@ export default function Navbar({
           />
         </div>
       </div>
-      <AnimatePresence>
-        <div className={`${isSearch ? "block" : "hidden"} w-full`}>
-          {isSearch && <SearchField />}
-        </div>
-      </AnimatePresence>
+      <div className={`${isSearch ? "block" : "hidden"} w-full`}>
+        {isSearch && <SearchField />}
+      </div>
     </div>
   );
 }
