@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { Article } from "@/db/schema";
+
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
+import { fetchArticles } from "@/redux/slices/articles-slice";
+
 import { BeatLoader } from "react-spinners";
 
 import { ArticleItem } from "@/components/articles/article-item";
@@ -11,42 +13,20 @@ import { ArticleItemSkeleton } from "@/components/skeletons";
 import { ArticleCategory } from "@/components/articles/article-category";
 
 export const ArticleList = () => {
-  const selectorArticles = useSelector((state: any) => state.articles);
-  const [articles, setArticles] = useState<Article[]>([]);
-
-  const [isLoading, setIsLoading] = useState({
-    initial: false,
-    categorized: false,
-  });
+  const dispatch = useDispatch<AppDispatch>();
+  const { articles, loading } = useSelector(
+    (state: RootState) => state.articles,
+  );
 
   useEffect(() => {
-    const fetchArticles = async () => {
-      try {
-        setIsLoading({ initial: true, categorized: false });
-        const { data } = await axios.get("/api/articles");
-        setArticles(data);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setIsLoading({ initial: false, categorized: false });
-      }
-    };
-
-    fetchArticles();
-  }, []);
-
-  useEffect(() => {
-    if (selectorArticles.articles) {
-      setArticles([]);
-      setArticles(selectorArticles.articles);
-    }
-  }, [selectorArticles.articles]);
+    dispatch(fetchArticles());
+  }, [dispatch]);
 
   return (
     <>
-      <ArticleCategory setIsLoading={setIsLoading} setArticles={setArticles} />
+      <ArticleCategory />
 
-      {isLoading.initial && (
+      {loading.articles && (
         <>
           <ArticleItemSkeleton />
           <ArticleItemSkeleton />
@@ -55,7 +35,7 @@ export const ArticleList = () => {
         </>
       )}
 
-      {isLoading.categorized && (
+      {loading.categorize && (
         <>
           <div className="justify-center w-full flex dark:hidden m-2">
             <BeatLoader size={20} color="black" />
@@ -66,15 +46,9 @@ export const ArticleList = () => {
         </>
       )}
 
-      {articles.length ? (
-        articles.map((article) => (
-          <ArticleItem article={article} key={article.id} />
-        ))
-      ) : (
-        <p className="justify-center w-full flex mt-10 font-bold">
-          {"Can't find searched article 😔"}
-        </p>
-      )}
+      {articles.map((article) => (
+        <ArticleItem article={article} key={article.id} />
+      ))}
     </>
   );
 };

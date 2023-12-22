@@ -8,7 +8,7 @@ import { revalidatePath } from "next/cache";
 
 export type FormState = {
   searchedValue: string;
-  data: [] | Article[];
+  data: Article[];
 };
 
 export async function searchDataAction(

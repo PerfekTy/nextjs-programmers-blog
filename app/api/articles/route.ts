@@ -19,15 +19,15 @@ const getArticles = async (sortBy: string) => {
 export const handler = async (req: Request) => {
   if (req.method === "POST") {
     try {
-      const { latest, oldest } = await req.json();
+      const { categorize } = await req.json();
 
-      if (latest && typeof latest === "string") {
-        const data = await getArticles(latest);
+      if (categorize && typeof categorize === "string") {
+        const data = await getArticles(categorize);
         return new Response(JSON.stringify(data), { status: 200 });
       }
 
-      if (oldest && typeof oldest === "string") {
-        const data = await getArticles(oldest);
+      if (categorize && typeof categorize === "string") {
+        const data = await getArticles(categorize);
         return new Response(JSON.stringify(data), { status: 200 });
       }
     } catch (e) {

@@ -1,71 +1,26 @@
-import { useSelector } from "react-redux";
 import { FormEvent, useState } from "react";
-import axios from "axios";
 
-import { Article } from "@/db/schema";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
 
 import { MotionButton } from "@/components/ui/motion-button";
+import {
+  categorizeArticles,
+  setSearchedArticles,
+} from "@/redux/slices/articles-slice";
 
-type ArticleCategoryProps = {
-  setArticles: (articles: Article[]) => void;
-  setIsLoading: (isLoading: { initial: boolean; categorized: boolean }) => void;
-};
-
-export function ArticleCategory({
-  setIsLoading,
-  setArticles,
-}: ArticleCategoryProps) {
-  const selectorArticles = useSelector((state: any) => state.articles);
-  const [isCategorized, setIsCategorized] = useState({
+export function ArticleCategory() {
+  const dispatch = useDispatch<AppDispatch>();
+  const { articles } = useSelector((state: RootState) => state.articles);
+  const [isButtonClicked, setIsButtonClicked] = useState({
     latest: true,
     oldest: false,
-    sortLatest: "",
-    sortOldest: "",
   });
+  const [categorize, setCategorize] = useState("");
 
-  const sortArticlesByDate = (sortingMethod: string) => {
-    switch (sortingMethod) {
-      case "desc":
-        return setArticles(
-          [...selectorArticles.articles].sort(
-            (a, b) =>
-              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-          ),
-        );
-
-      case "asc":
-        return setArticles(
-          [...selectorArticles.articles].sort(
-            (a, b) =>
-              new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
-          ),
-        );
-    }
-  };
-
-  const onSubmit = async (e: FormEvent) => {
+  const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    try {
-      setIsLoading({ initial: false, categorized: true });
-
-      if (selectorArticles.articles.length && isCategorized.latest) {
-        return sortArticlesByDate("desc");
-      }
-      if (selectorArticles.articles.length && isCategorized.oldest) {
-        return sortArticlesByDate("asc");
-      }
-
-      const { data } = await axios.post("/api/articles", {
-        latest: isCategorized.sortLatest,
-        oldest: isCategorized.sortOldest,
-      });
-
-      return setArticles(data);
-    } catch (e) {
-      console.log(e);
-    } finally {
-      setIsLoading({ initial: false, categorized: false });
-    }
+    dispatch(categorizeArticles(categorize));
   };
 
   return (
@@ -74,35 +29,27 @@ export function ArticleCategory({
         variant="ghost"
         style={`hover:bg-button_active2 hover:dark:bg-button_active cursor-pointer text-lg font-normal 
         ${
-          isCategorized.latest &&
+          isButtonClicked.latest &&
           "font-bold dark:bg-button_active bg-button_active2"
         }`}
         content="Latest"
-        onClick={() =>
-          setIsCategorized({
-            latest: true,
-            oldest: false,
-            sortLatest: "desc",
-            sortOldest: "",
-          })
-        }
+        onClick={() => {
+          setCategorize("desc");
+          setIsButtonClicked({ latest: true, oldest: false });
+        }}
       />
       <MotionButton
         variant="ghost"
         style={`hover:bg-button_active2 hover:dark:bg-button_active cursor-pointer text-lg font-normal 
         ${
-          isCategorized.oldest &&
+          isButtonClicked.oldest &&
           "font-bold dark:bg-button_active bg-button_active2"
         }`}
         content="Oldest"
-        onClick={() =>
-          setIsCategorized({
-            latest: false,
-            oldest: true,
-            sortLatest: "",
-            sortOldest: "asc",
-          })
-        }
+        onClick={() => {
+          setCategorize("asc");
+          setIsButtonClicked({ latest: false, oldest: true });
+        }}
       />
     </form>
   );
