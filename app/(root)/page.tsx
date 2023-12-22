@@ -1,9 +1,12 @@
-import { ArticleList } from "@/components/articles/article-list";
+import {ArticleList} from "@/components/articles/article-list";
+import {ArticleContextProvider} from "@/app/articleContext/article-context";
 
 export default function Page() {
-  return (
-    <>
-      <ArticleList />
-    </>
-  );
+    return (
+        <>
+            <ArticleContextProvider>
+                <ArticleList/>
+            </ArticleContextProvider>
+        </>
+    );
 }

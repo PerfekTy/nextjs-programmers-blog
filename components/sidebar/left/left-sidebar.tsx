@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-import { routes } from "@/components/sidebar/routes";
+import { routes } from "@/components/sidebar/left/routes";
 
 export const LeftSidebar = () => {
   const router = useRouter();
