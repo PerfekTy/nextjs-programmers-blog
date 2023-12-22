@@ -1,48 +1,35 @@
 "use client";
 
-import { useState } from "react";
-import Navbar from "@/components/nav/navbar";
-import { Spin } from "hamburger-react";
-import { AnimatePresence, motion } from "framer-motion";
-import SidebarLeft from "@/components/left-sidebar/sidebar_left";
+import React, {useState} from "react";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const [isMobile, setIsMobile] = useState(false);
+import {Navbar} from "@/components/nav/navbar";
+import {LeftSidebar} from "@/components/sidebar/left/left-sidebar";
+import {ToggleTheme} from "@/components/ui/toggle-theme";
+import {LeftSidebarMobile} from "@/components/sidebar/left/left-sidebar-mobile";
 
-  return (
-    <>
-      <main className="flex flex-col justify-center">
-        <nav>
-          <Navbar setIsMobile={setIsMobile} isMobile={isMobile} />
-        </nav>
-        <article className="flex justify-center h-screen xl:mx-[20%] md:mt-0">
-          <AnimatePresence>
-            {isMobile ? (
-              <motion.section
-                initial={{ x: -300 }}
-                animate={{ x: 0 }}
-                exit={{ x: -300 }}
-                transition={{ type: "just", ease: "easeInOut" }}
-                className="fixed left-0 top-0 h-screen w-[300px] bg-sidebar"
-              >
-                <div
-                  className="flex justify-end md:hidden"
-                  onClick={() => setIsMobile(!isMobile)}
-                >
-                  <Spin size={18} duration={0.5} toggled={isMobile} />
-                </div>
-              </motion.section>
-            ) : (
-              <SidebarLeft/>
-            )}
-          </AnimatePresence>
-          <article className="w-full flex justify-center">{children}</article>
-          <section className="border w-[350px] justify-center">
-            RIGHT SIDE
-          </section>
-        </article>
-        <footer className="w-full flex justify-center">FOOTER</footer>
-      </main>
-    </>
-  );
+export default function Layout({children}: { children: React.ReactNode }) {
+    const [isMobile, setIsMobile] = useState(false);
+
+    return (
+        <>
+            <main className="flex flex-col justify-center">
+                <nav>
+                    <Navbar setIsMobile={setIsMobile} isMobile={isMobile}/>
+                </nav>
+                <article className="flex justify-center 2xl:mx-[20%] md:mt-0">
+                    <LeftSidebarMobile setIsMobile={setIsMobile} isMobile={isMobile}/>
+                    <div className="hidden md:block border-r dark:border-none">
+                        <LeftSidebar/>
+                    </div>
+                    <article className="w-full m-2">{children}</article>
+                    <section className="border-l w-[350px] justify-center lg:block hidden">
+                        Right
+                    </section>
+                </article>
+                <footer className="w-full flex justify-center border">
+                    <ToggleTheme/>
+                </footer>
+            </main>
+        </>
+    );
 }

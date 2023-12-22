@@ -1,0 +1,1 @@
+ALTER TABLE "articles" ALTER COLUMN "tags" SET DATA TYPE varchar;
