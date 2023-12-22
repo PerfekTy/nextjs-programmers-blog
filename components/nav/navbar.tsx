@@ -53,19 +53,9 @@ export function Navbar({
           />
         </div>
       </div>
-      <AnimatePresence>
-        {isSearch && (
-          <motion.div
-            initial={{ y: -50 }}
-            animate={{ y: 0 }}
-            exit={{ y: -50 }}
-            transition={{ type: "just", ease: "easeInOut", duration: 0.1 }}
-            className="w-full"
-          >
-            <SearchField />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className={`${isSearch ? "block" : "hidden"} w-full`}>
+        {isSearch && <SearchField />}
+      </div>
     </div>
   );
 }
