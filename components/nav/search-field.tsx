@@ -1,21 +1,19 @@
 import { useFormState } from "react-dom";
 import { useDispatch } from "react-redux";
-import { Search } from "lucide-react";
+import { useEffect } from "react";
 
 import { FormState, searchDataAction } from "@/app/(root)/actions";
 
+import { Search } from "lucide-react";
+
 import { Input } from "@/components/ui/input";
-import {useContext, useEffect} from "react";
 import { setArticles } from "@/redux/slices/articles-slice";
-import {ArticleContext} from "@/app/articleContext/article-context";
 
 export function SearchField() {
-  // TODO: fix data: [], should be null of undefined
   const dispatch = useDispatch();
-  const articles = useContext(ArticleContext)
   const [state, dispatchAction] = useFormState(searchDataAction, {
     searchedValue: "",
-    data: articles.data,
+    data: [],
   } as FormState);
 
   useEffect(() => {

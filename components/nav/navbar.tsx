@@ -54,7 +54,7 @@ export function Navbar({
         </div>
       </div>
       <div className={`${isSearch ? "block" : "hidden"} w-full`}>
-        {isSearch && <SearchField />}
+        <SearchField />
       </div>
     </div>
   );

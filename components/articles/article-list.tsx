@@ -1,31 +1,30 @@
 "use client";
 
-import {useContext, useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
 import { Article } from "@/db/schema";
+import { BeatLoader } from "react-spinners";
 
 import { ArticleItem } from "@/components/articles/article-item";
 import { ArticleItemSkeleton } from "@/components/skeletons";
-import { BeatLoader } from "react-spinners";
-import { useSelector } from "react-redux";
 import { ArticleCategory } from "@/components/articles/article-category";
-import {ArticleContext} from "@/app/articleContext/article-context";
 
 export const ArticleList = () => {
   const selectorArticles = useSelector((state: any) => state.articles);
+  const [articles, setArticles] = useState<Article[]>([]);
+
   const [isLoading, setIsLoading] = useState({
     initial: false,
     categorized: false,
   });
-
-  const Articles = useContext(ArticleContext)
 
   useEffect(() => {
     const fetchArticles = async () => {
       try {
         setIsLoading({ initial: true, categorized: false });
         const { data } = await axios.get("/api/articles");
-        Articles.setData(data);
+        setArticles(data);
       } catch (e) {
         console.log(e);
       } finally {
@@ -38,14 +37,14 @@ export const ArticleList = () => {
 
   useEffect(() => {
     if (selectorArticles.articles) {
-      Articles.setData([]);
-      Articles.setData(selectorArticles.articles);
+      setArticles([]);
+      setArticles(selectorArticles.articles);
     }
   }, [selectorArticles.articles]);
 
   return (
     <>
-      <ArticleCategory setIsLoading={setIsLoading} setArticles={Articles.setData} />
+      <ArticleCategory setIsLoading={setIsLoading} setArticles={setArticles} />
 
       {isLoading.initial && (
         <>
@@ -67,8 +66,8 @@ export const ArticleList = () => {
         </>
       )}
 
-      {Articles.data.length ? (
-        Articles.data.map((article) => (
+      {articles.length ? (
+        articles.map((article) => (
           <ArticleItem article={article} key={article.id} />
         ))
       ) : (
