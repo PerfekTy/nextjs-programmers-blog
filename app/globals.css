@@ -58,4 +58,32 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  [data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+  }
+
+  [data-title]:after {
+    content: attr(data-title);
+    background-color: #fefefe;
+    color: #111;
+    font-size: 13px;
+    font-weight: normal;
+    position: absolute;
+    padding: 10px;
+    border-radius: 15px;
+    bottom: -2.5em;
+    left: 50%;
+    text-align: center;
+    opacity: 0;
+    z-index: 99;
+    visibility: hidden;
+    transition: all 0.3s linear;
+  }
+
+  [data-title] {
+    position: relative;
+  }
 }

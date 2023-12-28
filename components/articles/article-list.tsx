@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
@@ -9,7 +9,6 @@ import { fetchArticles } from "@/redux/slices/articles-slice";
 import { BeatLoader } from "react-spinners";
 
 import { ArticleItem } from "@/components/articles/article-item";
-import { ArticleItemSkeleton } from "@/components/skeletons";
 import { ArticleCategory } from "@/components/articles/article-category";
 
 export const ArticleList = () => {
@@ -26,15 +25,6 @@ export const ArticleList = () => {
     <>
       <ArticleCategory />
 
-      {loading.articles && (
-        <>
-          <ArticleItemSkeleton />
-          <ArticleItemSkeleton />
-          <ArticleItemSkeleton />
-          <ArticleItemSkeleton />
-        </>
-      )}
-
       {loading.categorize && (
         <>
           <div className="justify-center w-full flex dark:hidden m-2">
@@ -46,9 +36,13 @@ export const ArticleList = () => {
         </>
       )}
 
-      {articles.map((article) => (
-        <ArticleItem article={article} key={article.id} />
-      ))}
+      {loading.articles ? (
+        <p className="text-center text-lg">Loading...</p>
+      ) : (
+        articles.map((article) => (
+          <ArticleItem article={article} key={article.id} />
+        ))
+      )}
     </>
   );
 };

@@ -1,9 +1,15 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 export function Logo() {
+  const router = useRouter();
+
   return (
-    <div className="flex items-center justify-center gap-3">
+    <div
+      className="flex items-center justify-center gap-3 cursor-pointer"
+      onClick={() => router.push("/")}
+    >
       <Image
         src="/assets/logos/screen-logo-dark.svg"
         alt="icon logo of programmers-blog"

@@ -4,7 +4,7 @@ import { useFormState } from "react-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import { setSearchedArticles } from "@/redux/slices/articles-slice";
-import { FormState, searchDataAction } from "@/app/(root)/actions";
+import { FormState, searchDataAction } from "@/app/actions";
 
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";

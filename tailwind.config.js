@@ -24,6 +24,7 @@ module.exports = {
         foreground: "hsl(var(--foreground))",
         button_active: "#4c4c4c",
         button_active2: "#d3d3d3",
+        button_active3: "#2a2a2a",
         button_text: "#6366f1",
         sidebar: "#171717",
         sidebar_item_dark: "#252261",
