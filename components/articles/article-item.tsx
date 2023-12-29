@@ -46,7 +46,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
             }}
           >
             {/* Avatar */}
-            <Avatar src={"/us.jpg"} />
+            <Avatar src="/us.jpg" isMedium />
             <div>
               <p className="cursor-pointer">{article.author}</p>
               <p className="text-muted-foreground text-sm">

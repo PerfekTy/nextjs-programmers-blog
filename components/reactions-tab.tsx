@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 
 import { Bookmark, Heart, MessageSquare, MoreHorizontal } from "lucide-react";
@@ -9,7 +11,7 @@ export const ReactionsTab = () => {
   });
 
   return (
-    <div className="flex flex-col gap-7 sticky top-0 text-sm font-light text-muted-foreground">
+    <div className="flex gap-7 text-[12px] flex-col md:flex-row md:text-sm font-light text-muted-foreground">
       <span
         className="flex flex-col items-center gap-1 cursor-pointer"
         data-title="Like"
@@ -24,7 +26,7 @@ export const ReactionsTab = () => {
             isReacted.heart && "text-[#ef4444]"
           } hover:text-[#ef4444] transition-all`}
         >
-          <Heart fill={isReacted.heart ? "#ef4444" : "#030303"} />
+          <Heart fill={isReacted.heart ? "#ef4444" : "#171717"} />
         </div>
         <p>200</p>
       </span>
@@ -51,12 +53,12 @@ export const ReactionsTab = () => {
             isReacted.bookmark && "text-button_text"
           } hover:text-button_text transition-all`}
         >
-          <Bookmark fill={isReacted.bookmark ? "#6366f1" : "#030303"} />
+          <Bookmark fill={isReacted.bookmark ? "#6366f1" : "#171717"} />
         </div>
         <p>200</p>
       </span>
       <span
-        className="flex flex-col items-center gap-1 cursor-pointer pt-10"
+        className="flex flex-col items-center gap-1 cursor-pointer"
         data-title="More options"
       >
         <div className="hover:scale-110 transition-all">

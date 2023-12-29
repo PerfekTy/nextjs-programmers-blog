@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { Heart } from "lucide-react";
+
+import { ReactionsTab } from "@/components/reactions-tab";
+import { Avatar } from "@/components/ui/avatar";
 
 export default function Page() {
   return (
@@ -14,33 +16,22 @@ export default function Page() {
       />
       <div className="p-3 md:p-8">
         {/* AUTHOR */}
-        <div className="flex items-center gap-2 pb-4">
-          <Image
-            src="/us.jpg"
-            alt="us"
-            width={50}
-            height={50}
-            className="rounded-full aspect-square"
-          />
+        <div className="flex items-center gap-2 pb-4 relative">
+          <Avatar src="/us.jpg" isMedium />
 
           <span>
             <p className="font-bold">Author</p>
             <p className="text-sm text-muted-foreground">Date</p>
           </span>
-        </div>
 
-        {/* REACTIONS */}
-        <div>
-          <span className="flex items-center gap-2">
-            <Heart fill="#ef4444" color="#ef4444" />
-            <p>200</p>
-          </span>
-          {/* WILL BE MORE */}
+          <div className="ml-auto absolute right-0 top-0">
+            <ReactionsTab />
+          </div>
         </div>
 
         {/* ARTICLE */}
         <article className="py-2">
-          <h1 className="text-3xl md:text-[36px] font-black tracking-wider leading-10 pb-2">
+          <h1 className="text-3xl md:text-[36px] font-black tracking-wider leading-10 pb-2 pr-10 md:pr-0">
             Diving into Server Actions in Next.js 14
           </h1>
           <span className="flex items-center gap-5 text-[15px] text-muted-foreground">
