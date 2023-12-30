@@ -3,8 +3,9 @@
 import { useState } from "react";
 
 import { Bookmark, Heart, MessageSquare, MoreHorizontal } from "lucide-react";
+import { ArticleReactionT } from "@/app/definitions";
 
-export const ReactionsTab = () => {
+export const ReactionsTab = ({ article }: ArticleReactionT) => {
   const [isReacted, setIsReacted] = useState({
     bookmark: false,
     heart: false,
@@ -28,7 +29,7 @@ export const ReactionsTab = () => {
         >
           <Heart fill={isReacted.heart ? "#ef4444" : "#171717"} />
         </div>
-        <p>200</p>
+        <p>{article?.likes}</p>
       </span>
       <span
         className="flex flex-col items-center gap-1 cursor-pointer"
@@ -37,7 +38,7 @@ export const ReactionsTab = () => {
         <div className="hover:text-[#f59e0b] transition-all">
           <MessageSquare />
         </div>
-        <p>200</p>
+        <p>{article?.comments}</p>
       </span>
       <span
         className="flex flex-col items-center gap-1 cursor-pointer"
@@ -55,7 +56,7 @@ export const ReactionsTab = () => {
         >
           <Bookmark fill={isReacted.bookmark ? "#6366f1" : "#171717"} />
         </div>
-        <p>200</p>
+        <p>{article?.bookmarks}</p>
       </span>
       <span
         className="flex flex-col items-center gap-1 cursor-pointer"
@@ -64,7 +65,6 @@ export const ReactionsTab = () => {
         <div className="hover:scale-110 transition-all">
           <MoreHorizontal />
         </div>
-        <p>200</p>
       </span>
     </div>
   );

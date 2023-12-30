@@ -50,6 +50,20 @@
       "when": 1703944655501,
       "tag": "0006_pretty_zeigeist",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1703945579675,
+      "tag": "0007_first_enchantress",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1703945990219,
+      "tag": "0008_white_silverclaw",
+      "breakpoints": true
     }
   ]
 }

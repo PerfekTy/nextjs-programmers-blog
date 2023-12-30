@@ -51,6 +51,8 @@ export const ArticleTitle = ({
     dispatch(fetchArticle(articleTitle));
   }, [articleTitle, dispatch]);
 
+  console.log(articles[0]);
+
   return (
     <>
       {loading.articles ? (
@@ -82,7 +84,7 @@ export const ArticleTitle = ({
               </span>
 
               <div className="ml-auto absolute right-0 top-0">
-                <ReactionsTab />
+                <ReactionsTab article={articles[0]} />
               </div>
             </div>
 
