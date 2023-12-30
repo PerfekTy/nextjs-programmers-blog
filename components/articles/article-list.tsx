@@ -43,6 +43,10 @@ export const ArticleList = () => {
           <ArticleItem article={article} key={article.id} />
         ))
       )}
+
+      {!articles.length && (
+        <p className="text-center text-sm">There is no articles 😔</p>
+      )}
     </>
   );
 };

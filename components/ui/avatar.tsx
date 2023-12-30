@@ -4,7 +4,7 @@ type AvatarProps = {
   src: string;
   isLarge?: boolean;
   isMedium?: boolean;
-  onClick: () => void;
+  onClick: (e?: any) => void;
 };
 
 export const Avatar = ({ src, isLarge, isMedium, onClick }: AvatarProps) => {

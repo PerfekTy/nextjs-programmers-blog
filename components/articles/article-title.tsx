@@ -91,8 +91,12 @@ export const ArticleTitle = ({
               <h1 className="text-3xl md:text-[36px] font-black tracking-widest leading-10 pb-2 pr-10 md:pr-0">
                 {articles[0]?.title}
               </h1>
-              <span className="flex items-center gap-5 text-[15px] text-muted-foreground">
-                {articles[0]?.tags}
+              <span className="flex gap-3 text-sm text-muted-foreground">
+                {articles[0]?.tags.map((tag) => (
+                  <p key={tag} className="cursor-pointer">
+                    #{tag}
+                  </p>
+                ))}
               </span>
               <p className="mt-5">{articles[0]?.text}</p>
             </article>

@@ -38,15 +38,15 @@ export const ArticleItem = ({ article }: { article: Article }) => {
     >
       <div className="rounded-lg dark:bg-sidebar bg-white dark:border-none border">
         <div className="flex items-center">
-          <div
-            className="hover:dark:bg-button_active3 hover:bg-button_active2 hover:rounded-tl-lg flex items-center gap-3 px-5 py-3"
-            onClick={(e) => {
-              e.stopPropagation();
-              router.push(`/${article.author}`);
-            }}
-          >
+          <div className="hover:dark:bg-button_active3 hover:bg-button_active2 hover:rounded-tl-lg flex items-center gap-3 px-5 py-3">
             {/* Avatar */}
-            <Avatar src="/us.jpg" />
+            <Avatar
+              src="/us.jpg"
+              onClick={(e) => {
+                e.stopPropagation();
+                router.push(`/${article.author}`);
+              }}
+            />
             <div>
               <p className="cursor-pointer">{article.author}</p>
               <p className="text-muted-foreground text-sm">
@@ -59,8 +59,12 @@ export const ArticleItem = ({ article }: { article: Article }) => {
           <h1 className="text-3xl font-bold hover:dark:text-button_text hover:text-button_active">
             {article.title}
           </h1>
-          <span className="flex gap-5 text-sm text-muted-foreground">
-            <p className="cursor-pointer">{article.tags}</p>
+          <span className="flex gap-3 text-sm text-muted-foreground">
+            {article.tags.map((tag) => (
+              <p key={tag} className="cursor-pointer">
+                #{tag}
+              </p>
+            ))}
           </span>
           <text className={`${montserrat.className} line-clamp-3 text-[15px]`}>
             {article.text}
