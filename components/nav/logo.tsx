@@ -15,7 +15,8 @@ export function Logo() {
         alt="icon logo of programmers-blog"
         width={30}
         height={30}
-        className="dark:block hidden w-8"
+        priority
+        className="dark:block hidden"
       />
       <motion.div
         initial={{ y: -70 }}
@@ -24,6 +25,7 @@ export function Logo() {
       >
         <Image
           src="/assets/logos/text-logo-dark.svg"
+          priority
           alt="programmers-blog logo"
           width={300}
           height={300}
@@ -35,7 +37,8 @@ export function Logo() {
         alt="programmers-blog logo"
         width={30}
         height={30}
-        className="dark:hidden block w-8"
+        priority
+        className="dark:hidden block"
       />
       <motion.div
         initial={{ y: -70 }}
@@ -46,6 +49,7 @@ export function Logo() {
           src="/assets/logos/text-logo-light.svg"
           alt="programmers-blog logo"
           width={300}
+          priority
           height={300}
           className="dark:hidden block"
         />

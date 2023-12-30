@@ -36,6 +36,14 @@ export const categorizeArticles = createAsyncThunk(
   },
 );
 
+export const fetchArticle = createAsyncThunk(
+  "articles/fetchArticle",
+  async (title: string) => {
+    const { data } = await axios.get(`/api/articles/${title}`);
+    return data;
+  },
+);
+
 const articlesSlice = createSlice({
   name: "articles",
   initialState,
@@ -65,6 +73,17 @@ const articlesSlice = createSlice({
         (state, action: PayloadAction<Article[]>) => {
           state.articles = [...action.payload];
           state.loading.categorize = false;
+        },
+      );
+    builder
+      .addCase(fetchArticle.pending, (state) => {
+        state.loading.articles = true;
+      })
+      .addCase(
+        fetchArticle.fulfilled,
+        (state, action: PayloadAction<Article[]>) => {
+          state.articles = [...action.payload];
+          state.loading.articles = false;
         },
       );
   },
