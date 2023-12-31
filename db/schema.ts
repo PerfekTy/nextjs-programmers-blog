@@ -1,5 +1,12 @@
 import { pgTable } from "drizzle-orm/pg-core/table";
-import { serial, timestamp, varchar, text, integer } from "drizzle-orm/pg-core";
+import { serial, timestamp, varchar, text, uuid } from "drizzle-orm/pg-core";
+
+export const users = pgTable("users", {
+  id: uuid("id").primaryKey(),
+  name: varchar("name").notNull(),
+  username: varchar("username").notNull().unique(),
+  email: varchar("email").notNull().unique(),
+});
 
 export const articles = pgTable("articles", {
   id: serial("id").primaryKey(),
@@ -7,13 +14,28 @@ export const articles = pgTable("articles", {
   text: varchar("text").notNull(),
   author: varchar("author").notNull(),
   tags: text("tags").array().notNull(),
-  // REACTIONS NOW STATIC TODO: TO CHANGE
-  likes: integer("likes"),
-  comments: integer("comments"),
-  bookmarks: integer("bookmarks"),
-  // REACTIONS NOW STATIC TODO: TO CHANGE
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
 
-export type Article = typeof articles.$inferSelect;
+export const bookmarks = pgTable("bookmarks", {
+  id: serial("id").primaryKey(),
+  articleId: serial("article_id").references(() => articles.id),
+  userId: uuid("user_id").references(() => users.id),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const comments = pgTable("comments", {
+  id: serial("id").primaryKey(),
+  text: varchar("text").notNull(),
+  articleId: serial("article_id").references(() => articles.id),
+  userId: uuid("user_id").references(() => users.id),
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const likes = pgTable("likes", {
+  id: serial("id").primaryKey(),
+  articleId: serial("article_id").references(() => articles.id),
+  userId: uuid("user_id").references(() => users.id),
+  createdAt: timestamp("created_at").defaultNow(),
+});
