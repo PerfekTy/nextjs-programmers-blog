@@ -1,70 +1,61 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 import { Bookmark, Heart, MessageSquare, MoreHorizontal } from "lucide-react";
-import { ArticleReactionT } from "@/app/definitions";
 
-export const ReactionsTab = ({ article }: ArticleReactionT) => {
-  const [isReacted, setIsReacted] = useState({
-    bookmark: false,
-    heart: false,
-  });
+export const ReactionsTab = ({
+  articleTitle,
+  username,
+}: {
+  articleTitle: string;
+  username: string;
+}) => {
+  const [isBookmarked, setIsBookmarked] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
   return (
-    <div className="flex gap-7 text-[12px] flex-col md:flex-row md:text-sm font-light text-muted-foreground">
-      <span
+    <div className="flex gap-7 text-[12px] flex-col lg:flex-row md:text-sm font-light text-muted-foreground">
+      <form
         className="flex flex-col items-center gap-1 cursor-pointer"
         data-title="Like"
-        onClick={() =>
-          setIsReacted((prevState) => {
-            return { ...prevState, heart: !isReacted.heart };
-          })
-        }
+        onClick={() => setIsLiked(!isLiked)}
       >
-        <div
-          className={`${
-            isReacted.heart && "text-[#ef4444]"
-          } hover:text-[#ef4444] transition-all`}
+        <button
+          className={`hover:text-[#ef4444] ${isLiked && "text-[#ef4444]"}`}
         >
-          <Heart fill={isReacted.heart ? "#ef4444" : "#171717"} />
-        </div>
-        <p>{article?.likes}</p>
-      </span>
-      <span
-        className="flex flex-col items-center gap-1 cursor-pointer"
-        data-title="Jump to comments"
-      >
-        <div className="hover:text-[#f59e0b] transition-all">
-          <MessageSquare />
-        </div>
-        <p>{article?.comments}</p>
-      </span>
-      <span
+          <Heart fill={isLiked ? "#ef4444" : "#171717"} />
+        </button>
+        {/* TODO: ADD REACTION*/}
+      </form>
+
+      <form
         className="flex flex-col items-center gap-1 cursor-pointer"
         data-title="Save"
-        onClick={() =>
-          setIsReacted((prevState) => {
-            return { ...prevState, bookmark: !isReacted.bookmark };
-          })
-        }
+        onClick={() => setIsBookmarked(!isBookmarked)}
       >
-        <div
-          className={`${
-            isReacted.bookmark && "text-button_text"
-          } hover:text-button_text transition-all`}
+        <button
+          className={`hover:text-[#6366f1] ${isBookmarked && "text-[#6366f1]"}`}
         >
-          <Bookmark fill={isReacted.bookmark ? "#6366f1" : "#171717"} />
-        </div>
-        <p>{article?.bookmarks}</p>
+          <Bookmark fill={isBookmarked ? "#6366f1" : "#171717"} />
+        </button>
+        {/* TODO: ADD REACTION*/}
+      </form>
+
+      <span
+        className="flex flex-col items-center gap-1 cursor-pointer hover:text-[#f59e0b]"
+        data-title="Jump to comments"
+      >
+        <MessageSquare />
+        {/* TODO: ADD REACTION*/}
       </span>
+
       <span
         className="flex flex-col items-center gap-1 cursor-pointer"
         data-title="More options"
       >
-        <div className="hover:scale-110 transition-all">
-          <MoreHorizontal />
-        </div>
+        <MoreHorizontal />
+        {/* TODO: ADD REACTION*/}
       </span>
     </div>
   );

@@ -16,10 +16,10 @@ import { ReactionsTab } from "@/components/reactions-tab";
 export const ArticleTitle = ({
   params,
 }: {
-  params: { articleTitle: string };
+  params: { articleTitle: string; username: string };
 }) => {
   const router = useRouter();
-  const { articleTitle } = params;
+  const { articleTitle, username } = params;
   const dispatch = useDispatch<AppDispatch>();
   const { articles, loading } = useSelector(
     (state: RootState) => state.articles,
@@ -77,14 +77,19 @@ export const ArticleTitle = ({
               />
 
               <span>
-                <p className="font-bold">{articles[0]?.author}</p>
+                <p
+                  className="font-bold cursor-pointer"
+                  onClick={() => router.push(`/${articles[0]?.author}`)}
+                >
+                  {articles[0]?.author}
+                </p>
                 <p className="text-sm text-muted-foreground">
                   {createdAt} ({formatDistanceCreatedAt})
                 </p>
               </span>
 
-              <div className="ml-auto absolute right-0 top-0">
-                <ReactionsTab article={articles[0]} />
+              <div className="absolute -right-2 -top-2 p-3 md:p-0 lg:ml-auto">
+                <ReactionsTab username={username} articleTitle={articleTitle} />
               </div>
             </div>
 
@@ -94,7 +99,7 @@ export const ArticleTitle = ({
                 {articles[0]?.title}
               </h1>
               <span className="flex gap-3 text-sm text-muted-foreground">
-                {articles[0]?.tags.map((tag) => (
+                {articles[0]?.tags.map((tag: string) => (
                   <p key={tag} className="cursor-pointer">
                     #{tag}
                   </p>

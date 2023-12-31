@@ -2,9 +2,10 @@ import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import formatDistanceToNow from "date-fns/esm/formatDistanceToNow";
 
-import { Article } from "@/db/schema";
 import { Avatar } from "@/components/ui/avatar";
 import { montserrat } from "@/app/fonts";
+
+import { Article } from "@/app/definitions";
 
 export const ArticleItem = ({ article }: { article: Article }) => {
   const router = useRouter();
@@ -38,7 +39,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
     >
       <div className="rounded-lg dark:bg-sidebar bg-white dark:border-none border">
         <div className="flex items-center">
-          <div className="hover:dark:bg-button_active3 hover:bg-button_active2 hover:rounded-tl-lg flex items-center gap-3 px-5 py-3">
+          <div className="flex items-center gap-3 px-5 py-3">
             {/* Avatar */}
             <Avatar
               src="/us.jpg"
@@ -48,7 +49,15 @@ export const ArticleItem = ({ article }: { article: Article }) => {
               }}
             />
             <div>
-              <p className="cursor-pointer">{article.author}</p>
+              <p
+                className="cursor-pointer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  router.push(`/${article.author}`);
+                }}
+              >
+                {article.author}
+              </p>
               <p className="text-muted-foreground text-sm">
                 {createdAt} ({formatDistanceCreatedAt})
               </p>
@@ -60,7 +69,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
             {article.title}
           </h1>
           <span className="flex gap-3 text-sm text-muted-foreground">
-            {article.tags.map((tag) => (
+            {article.tags.map((tag: string) => (
               <p key={tag} className="cursor-pointer">
                 #{tag}
               </p>

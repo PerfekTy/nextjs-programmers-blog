@@ -1,9 +1,12 @@
 "use server";
 
 import { db } from "@/db";
-import { Article, articles } from "@/db/schema";
+import { articles, likes } from "@/db/schema";
 import { desc, ilike } from "drizzle-orm";
 import { or } from "drizzle-orm/sql/expressions/conditions";
+
+import { Article } from "@/app/definitions";
+
 import { revalidatePath } from "next/cache";
 
 export type FormState = {
@@ -44,4 +47,16 @@ export async function searchDataAction(
     searchedValue: "",
     data: [],
   };
+}
+
+export async function likeArticleAction(
+  username: string,
+  articleTitle: string,
+) {
+  try {
+    await db.insert(likes).values({ username, articleTitle });
+    console.log("like triggered: ", username, articleTitle);
+  } catch (e) {
+    console.log(e);
+  }
 }

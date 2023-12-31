@@ -20,22 +20,22 @@ export const articles = pgTable("articles", {
 
 export const bookmarks = pgTable("bookmarks", {
   id: serial("id").primaryKey(),
-  articleId: serial("article_id").references(() => articles.id),
-  userId: uuid("user_id").references(() => users.id),
+  articleTitle: varchar("article_title").references(() => articles.title),
+  username: varchar("user_id").references(() => users.username),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const comments = pgTable("comments", {
   id: serial("id").primaryKey(),
   text: varchar("text").notNull(),
-  articleId: serial("article_id").references(() => articles.id),
-  userId: uuid("user_id").references(() => users.id),
+  articleTitle: varchar("article_title").references(() => articles.title),
+  username: varchar("user_id").references(() => users.username),
   createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const likes = pgTable("likes", {
   id: serial("id").primaryKey(),
-  articleId: serial("article_id").references(() => articles.id),
-  userId: uuid("user_id").references(() => users.id),
+  articleTitle: varchar("article_title").references(() => articles.title),
+  username: varchar("user_id").references(() => users.username),
   createdAt: timestamp("created_at").defaultNow(),
 });
