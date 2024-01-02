@@ -6,6 +6,7 @@ import {Navbar} from "@/components/nav/navbar";
 import {LeftSidebar} from "@/components/sidebar/left/left-sidebar";
 import {ToggleTheme} from "@/components/ui/toggle-theme";
 import {LeftSidebarMobile} from "@/components/sidebar/left/left-sidebar-mobile";
+import RightSidebar from "@/components/sidebar/right/right-sidebar";
 
 export default function Layout({children}: { children: React.ReactNode }) {
     const [isMobile, setIsMobile] = useState(false);
@@ -23,7 +24,7 @@ export default function Layout({children}: { children: React.ReactNode }) {
                     </div>
                     <article className="w-full m-2">{children}</article>
                     <section className="border-l w-[350px] justify-center lg:block hidden">
-                        Right
+                        <RightSidebar/>
                     </section>
                 </article>
                 <footer className="w-full flex justify-center border">

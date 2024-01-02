@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+// @ts-ignore
 import { Article } from "@/db/schema";
 
 type ArticlesState = {

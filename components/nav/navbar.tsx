@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 
 import { Logo } from "@/components/nav/logo";
 import { MotionButton } from "@/components/ui/motion-button";
