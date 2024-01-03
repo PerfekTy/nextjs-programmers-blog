@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { articles, likes } from "@/db/schema";
 import { desc, ilike } from "drizzle-orm";
-import { or } from "drizzle-orm/sql/expressions/conditions";
+import { arrayContains, or } from "drizzle-orm/sql/expressions/conditions";
 
 import { Article } from "@/app/definitions";
 
@@ -16,7 +16,7 @@ export type FormState = {
 
 export async function searchDataAction(
   prevState: FormState,
-  formData: FormData,
+  formData: FormData
 ) {
   const searchedValue = formData.get("searchedValue") as string;
 
@@ -26,10 +26,10 @@ export async function searchDataAction(
       .from(articles)
       .where(
         or(
+          arrayContains(articles.tags, [searchedValue]),
           ilike(articles.author, `%${searchedValue}%`),
-          ilike(articles.tags, `%${searchedValue}%`),
-          ilike(articles.title, `%${searchedValue}%`),
-        ),
+          ilike(articles.title, `%${searchedValue}%`)
+        )
       )
       .orderBy(desc(articles.createdAt));
 
@@ -51,7 +51,7 @@ export async function searchDataAction(
 
 export async function likeArticleAction(
   username: string,
-  articleTitle: string,
+  articleTitle: string
 ) {
   try {
     await db.insert(likes).values({ username, articleTitle });

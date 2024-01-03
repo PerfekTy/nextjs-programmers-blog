@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-// @ts-ignore
-import { Article } from "@/db/schema";
+import { Article } from "@/app/definitions";
 
 type ArticlesState = {
   articles: Article[];
@@ -18,32 +17,6 @@ const initialState: ArticlesState = {
     categorize: false,
   },
 };
-
-export const fetchArticles = createAsyncThunk(
-  "articles/fetchArticles",
-  async () => {
-    const { data } = await axios.get("/api/articles");
-    return data;
-  },
-);
-
-export const categorizeArticles = createAsyncThunk(
-  "articles/categorizeArticles",
-  async (categorize: string) => {
-    const { data } = await axios.post("/api/articles", {
-      categorize,
-    });
-    return data;
-  },
-);
-
-export const fetchArticle = createAsyncThunk(
-  "articles/fetchArticle",
-  async (title: string) => {
-    const { data } = await axios.get(`/api/articles/${title}`);
-    return data;
-  },
-);
 
 const articlesSlice = createSlice({
   name: "articles",
@@ -63,7 +36,7 @@ const articlesSlice = createSlice({
         (state, action: PayloadAction<Article[]>) => {
           state.articles = [...action.payload];
           state.loading.articles = false;
-        },
+        }
       );
     builder
       .addCase(categorizeArticles.pending, (state) => {
@@ -74,7 +47,7 @@ const articlesSlice = createSlice({
         (state, action: PayloadAction<Article[]>) => {
           state.articles = [...action.payload];
           state.loading.categorize = false;
-        },
+        }
       );
     builder
       .addCase(fetchArticle.pending, (state) => {
@@ -85,10 +58,36 @@ const articlesSlice = createSlice({
         (state, action: PayloadAction<Article[]>) => {
           state.articles = [...action.payload];
           state.loading.articles = false;
-        },
+        }
       );
   },
 });
+
+export const fetchArticles = createAsyncThunk(
+  "articles/fetchArticles",
+  async () => {
+    const { data } = await axios.get("/api/articles");
+    return data;
+  }
+);
+
+export const categorizeArticles = createAsyncThunk(
+  "articles/categorizeArticles",
+  async (categorize: string) => {
+    const { data } = await axios.post("/api/articles", {
+      categorize,
+    });
+    return data;
+  }
+);
+
+export const fetchArticle = createAsyncThunk(
+  "articles/fetchArticle",
+  async (title: string) => {
+    const { data } = await axios.get(`/api/articles/${title}`);
+    return data;
+  }
+);
 
 export const { setSearchedArticles } = articlesSlice.actions;
 

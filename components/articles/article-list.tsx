@@ -14,7 +14,7 @@ import { ArticleCategory } from "@/components/articles/article-category";
 export const ArticleList = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { articles, loading } = useSelector(
-    (state: RootState) => state.articles,
+    (state: RootState) => state.articles
   );
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const ArticleList = () => {
         ))
       )}
 
-      {!articles.length && (
+      {!articles.length && !loading.articles && (
         <p className="text-center text-sm">There is no articles 😔</p>
       )}
     </>

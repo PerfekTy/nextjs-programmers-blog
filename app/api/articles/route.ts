@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { asc, desc } from "drizzle-orm";
 import { articles } from "@/db/schema";
+import { NextRequest } from "next/server";
 
 const getArticles = async (sortBy: string) => {
   switch (sortBy) {
@@ -16,7 +17,7 @@ const getArticles = async (sortBy: string) => {
   }
 };
 
-export const handler = async (req: Request) => {
+export const handler = async (req: NextRequest) => {
   if (req.method === "POST") {
     try {
       const { categorize } = await req.json();

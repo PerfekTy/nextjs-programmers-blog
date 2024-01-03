@@ -22,7 +22,7 @@ export const ArticleTitle = ({
   const { articleTitle, username } = params;
   const dispatch = useDispatch<AppDispatch>();
   const { articles, loading } = useSelector(
-    (state: RootState) => state.articles,
+    (state: RootState) => state.articles
   );
 
   const createdAt = useMemo(() => {
@@ -50,8 +50,6 @@ export const ArticleTitle = ({
   useEffect(() => {
     dispatch(fetchArticle(articleTitle));
   }, [articleTitle, dispatch]);
-
-  console.log(articles[0]);
 
   return (
     <>
