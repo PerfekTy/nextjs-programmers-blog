@@ -1,5 +1,5 @@
-export default function Page({ params }: { params: { tag: string } }) {
-  const { tag } = params;
+import { TagPage } from "@/components/tags/tag-page";
 
-  return <div>Tag {tag}</div>;
+export default function Page({ params }: { params: { tag: string } }) {
+  return <TagPage params={params} />;
 }

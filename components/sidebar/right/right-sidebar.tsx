@@ -6,7 +6,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { fetchTags } from "@/redux/slices/tags-slice";
 
 export const RightSidebar = () => {
-  const { tags } = useSelector((state: RootState) => state.tags);
+  const { tags, loading } = useSelector((state: RootState) => state.tags);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
@@ -18,16 +18,19 @@ export const RightSidebar = () => {
       <h2 className="font-bold text-2xl pt-3 pb-1 px-0 border-b-2 w-full text-center">
         Trending Tags
       </h2>
-      <ul className="flex flex-col text-center w-full text-lg">
-        {tags.map((tag, key) => (
-          <Link
-            href={`/tags/${tag.tag}`}
-            key={key}
-            className="px-2 py-3 hover:dark:bg-button_active hover:bg-button_active2 hover:rounded-lg"
-          >
-            #{tag.tag}
-          </Link>
-        ))}
+      <ul className="flex flex-col text-center w-full text-lg pt-2">
+        {!loading &&
+          tags.map((tag, key) => (
+            <Link
+              href={`/tags/${tag.tag}`}
+              key={key}
+              className="px-2 py-3 hover:dark:bg-button_active hover:bg-button_active2 hover:rounded-lg"
+            >
+              {"#" + tag.tag}
+            </Link>
+          ))}
+
+        {loading && <p>Loading...</p>}
       </ul>
     </div>
   );
