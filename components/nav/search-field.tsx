@@ -1,35 +1,37 @@
-import { useEffect } from "react";
-import { useFormState } from "react-dom";
-
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
-import { setSearchedArticles } from "@/redux/slices/articles-slice";
-import { FormState, searchDataAction } from "@/app/actions";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
 export function SearchField() {
-  const dispatch = useDispatch<AppDispatch>();
-  const [state, dispatchAction] = useFormState(searchDataAction, {
-    searchedValue: "",
-    data: [],
-  } as FormState);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
 
-  useEffect(() => {
-    dispatch(setSearchedArticles(state.data));
-  }, [dispatch, state.data]);
+  const handleSearch = useDebouncedCallback((term: string) => {
+    const params = new URLSearchParams(searchParams);
+
+    if (term) {
+      params.set("searchQuery", term);
+    } else {
+      params.delete("searchQuery");
+    }
+
+    replace(`${pathname}?${params.toString()}`);
+  }, 300);
 
   return (
-    <form className="w-full" action={dispatchAction}>
-      <fieldset className="flex flex-col relative items-center mx-5 mb-4 md:mb-0 md:mr-5 md:ml-0">
+    <div className="w-full">
+      <div className="flex flex-col relative items-center mx-5 mb-4 md:mb-0 md:mr-5 md:ml-0">
         <Search className="absolute left-3 top-2" />
         <Input
           className="pl-10 py-5 dark:bg-black shadow"
           name="searchedValue"
-          defaultValue={state.searchedValue}
+          onChange={(e) => handleSearch(e.target.value)}
+          defaultValue={searchParams.get("searchQuery")?.toString()}
         />
-      </fieldset>
-    </form>
+      </div>
+    </div>
   );
 }

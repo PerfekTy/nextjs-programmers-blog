@@ -1,30 +1,34 @@
-import { FormEvent, useState } from "react";
+"use client";
 
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "@/redux/store";
+import { useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { MotionButton } from "@/components/ui/motion-button";
-import {
-  categorizeArticles,
-  setSearchedArticles,
-} from "@/redux/slices/articles-slice";
 
 export function ArticleCategory() {
-  const dispatch = useDispatch<AppDispatch>();
-  const { articles } = useSelector((state: RootState) => state.articles);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { replace } = useRouter();
+
   const [isButtonClicked, setIsButtonClicked] = useState({
     latest: true,
     oldest: false,
   });
-  const [categorize, setCategorize] = useState("");
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    dispatch(categorizeArticles(categorize));
+  const handleSort = (term: string) => {
+    const params = new URLSearchParams(searchParams);
+
+    if (term) {
+      params.set("sortQuery", term);
+    } else {
+      params.delete("sortQuery");
+    }
+
+    replace(`${pathname}?${params.toString()}`);
   };
 
   return (
-    <form onSubmit={onSubmit} className="flex gap-5 ml-3">
+    <div className="flex gap-5 ml-3">
       <MotionButton
         variant="ghost"
         style={`hover:bg-button_active2 hover:dark:bg-button_active cursor-pointer text-lg font-normal 
@@ -34,8 +38,8 @@ export function ArticleCategory() {
         }`}
         content="Latest"
         onClick={() => {
-          setCategorize("desc");
           setIsButtonClicked({ latest: true, oldest: false });
+          handleSort("desc");
         }}
       />
       <MotionButton
@@ -47,10 +51,10 @@ export function ArticleCategory() {
         }`}
         content="Oldest"
         onClick={() => {
-          setCategorize("asc");
           setIsButtonClicked({ latest: false, oldest: true });
+          handleSort("asc");
         }}
       />
-    </form>
+    </div>
   );
 }

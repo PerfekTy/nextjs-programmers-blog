@@ -50,6 +50,11 @@ export function Navbar({
             variant="default"
             style="px-4 h-[2.2rem]"
           />
+          <MotionButton
+            content="Create post"
+            variant="ghost"
+            style="px-4 h-[2.2rem] hover:bg-[#4f46e5] border border-[#4f46e5] hover:text-white text-[#4f46e5]"
+          />
         </div>
       </div>
       <div className={`${isSearch ? "block" : "hidden"} w-full`}>

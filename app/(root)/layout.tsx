@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </nav>
         <article className="flex justify-center 2xl:mx-[20%] md:mt-0">
           <LeftSidebarMobile setIsMobile={setIsMobile} isMobile={isMobile} />
-          <div className="hidden md:block border-r dark:border-none">
+          <div className="hidden md:block">
             <LeftSidebar />
           </div>
           <article className="w-full m-2 h-screen">{children}</article>

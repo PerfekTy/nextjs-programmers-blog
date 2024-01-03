@@ -1,6 +1,6 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { unicaOne } from "@/app/fonts";
+import { unicaOne } from "@/app/utlis/fonts";
 
 import { Spin } from "hamburger-react";
 import { LeftSidebar } from "@/components/sidebar/left/left-sidebar";

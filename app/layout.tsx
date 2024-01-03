@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { inter } from "@/app/fonts";
+import { inter } from "@/app/utlis/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { ReduxProvider } from "@/redux/provider";

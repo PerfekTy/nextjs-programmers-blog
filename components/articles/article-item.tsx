@@ -1,11 +1,13 @@
+"use client";
+
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import formatDistanceToNow from "date-fns/esm/formatDistanceToNow";
 
 import { Avatar } from "@/components/ui/avatar";
-import { montserrat } from "@/app/fonts";
+import { montserrat } from "@/app/utlis/fonts";
 
-import { Article } from "@/app/definitions";
+import { Article } from "@/app/utlis/definitions";
 
 export const ArticleItem = ({ article }: { article: Article }) => {
   const router = useRouter();
@@ -35,7 +37,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
   return (
     <div
       className="m-3 cursor-pointer rounded-lg shadow"
-      onClick={() => router.push(`/${article.author}/${article.title}`)}
+      onClick={() => router.push(`/article/${article.author}/${article.title}`)}
     >
       <div className="rounded-lg dark:bg-sidebar bg-white dark:border-none border">
         <div className="flex items-center">
@@ -45,7 +47,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
               src="/us.jpg"
               onClick={(e) => {
                 e.stopPropagation();
-                router.push(`/${article.author}`);
+                router.push(`/article/${article.author}`);
               }}
             />
             <div>
@@ -53,7 +55,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
                 className="cursor-pointer"
                 onClick={(e) => {
                   e.stopPropagation();
-                  router.push(`/${article.author}`);
+                  router.push(`/article/${article.author}`);
                 }}
               >
                 {article.author}
