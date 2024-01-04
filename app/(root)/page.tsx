@@ -1,5 +1,6 @@
 import { ArticleList } from "@/components/articles/article-list";
 import { fetchArticles } from "../utils/data";
+import { UserButton } from '@clerk/nextjs'
 
 export default async function HomePage({
   searchParams,
@@ -16,6 +17,7 @@ export default async function HomePage({
 
   return (
     <>
+       <UserButton afterSignOutUrl="/"></UserButton>
       {searchQuery && (
         <span className="flex items-end gap-2 p-2 text-3xl transition-all">
           <h1 className="text-muted-foreground">Searched for: </h1>
