@@ -1,4 +1,4 @@
-import { fetchFilteredArticles } from "@/app/utils/data";
+import { filteredArticlesByTags } from "@/app/utils/functions";
 import { TagPage } from "@/components/tags/tag-page";
 
 type TagsPageProps = {
@@ -9,15 +9,11 @@ type TagsPageProps = {
 export default async function ArticleTagPage({
   params,
   searchParams,
-}: Readonly<TagsPageProps>) {
+}: TagsPageProps) {
   const searchQuery = searchParams?.searchQuery ?? params.tag;
-  const filteredArticles = await fetchFilteredArticles(searchQuery);
+  const filteredArticles = await filteredArticlesByTags(searchQuery);
 
   return (
-    <TagPage
-      params={params}
-      filteredArticles={filteredArticles}
-      searchQuery={searchQuery}
-    />
+    <TagPage searchQuery={searchQuery} filteredArticles={filteredArticles} />
   );
 }

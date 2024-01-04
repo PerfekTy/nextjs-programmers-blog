@@ -34,7 +34,8 @@ const tagsSlice = createSlice({
 });
 
 export const fetchTags = createAsyncThunk("tags/fetchTags", async () => {
-  const { data } = await axios.get("http://localhost:3000/api/top-articles");
+  const { data } = await axios.get("/api/top-articles");
+
   return data;
 });
 

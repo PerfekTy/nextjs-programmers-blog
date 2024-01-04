@@ -1,26 +1,28 @@
 import { ArticleList } from "@/components/articles/article-list";
-import { fetchFilteredArticles, fetchSortedArticles } from "../utils/data";
+import { fetchArticles } from "../utils/data";
 
 export default async function HomePage({
   searchParams,
-}: Readonly<{
+}: {
   searchParams?: {
     searchQuery?: string;
     sortQuery?: string;
   };
-}>) {
+}) {
   const searchQuery = searchParams?.searchQuery ?? "";
-  const sortQuery = searchParams?.sortQuery ?? "desc";
+  const sortQuery = searchParams?.sortQuery ?? "";
 
-  const filteredArticles = await fetchFilteredArticles(searchQuery);
-  const sortedArticles = await fetchSortedArticles(sortQuery);
+  const articles = await fetchArticles(searchQuery, sortQuery);
 
   return (
-    <ArticleList
-      filteredArticles={filteredArticles}
-      sortedArticles={sortedArticles}
-      searchQuery={searchQuery}
-      sortQuery={sortQuery}
-    />
+    <>
+      {searchQuery && (
+        <span className="flex items-end gap-2 p-2 text-3xl transition-all">
+          <h1 className="text-muted-foreground">Searched for: </h1>
+          <p className="text3">{searchQuery}</p>
+        </span>
+      )}
+      <ArticleList articles={articles} />
+    </>
   );
 }

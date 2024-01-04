@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { fetchTags } from "@/redux/slices/tags-slice";
+import { TagItemSkeleton } from "@/app/skeletons";
 
 export const RightSidebar = () => {
   const { tags, loading } = useSelector((state: RootState) => state.tags);
@@ -29,13 +30,10 @@ export const RightSidebar = () => {
               className="flex items-center px-2 py-3 hover:rounded-lg hover:bg-sidebar_item hover:dark:bg-sidebar_item_dark"
             >
               <p>#{tag.tag}</p>
-              <p className="ml-auto rounded-lg border border-violet px-2">
-                {key + 1}
-              </p>
             </Link>
           ))}
 
-        {loading && <p>Loading...</p>}
+        {loading && <TagItemSkeleton />}
       </ul>
     </div>
   );

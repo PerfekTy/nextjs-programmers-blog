@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const ArticleTagSkeleton = () => {
+export const ArticleSkeleton = () => {
   return (
     <Skeleton className="m-3 h-32 rounded-lg shadow">
       <div>
@@ -19,4 +19,8 @@ export const ArticleTagSkeleton = () => {
       </div>
     </Skeleton>
   );
+};
+
+export const TagItemSkeleton = () => {
+  return <Skeleton className="h-10 w-full pt-5" />;
 };

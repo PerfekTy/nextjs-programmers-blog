@@ -15,11 +15,7 @@ const initialState: ArticlesState = {
 const articlesSlice = createSlice({
   name: "articles",
   initialState,
-  reducers: {
-    setSearchedArticles: (state, action: PayloadAction<Article[]>) => {
-      state.articles = [...action.payload];
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchArticle.pending, (state) => {
@@ -42,7 +38,5 @@ export const fetchArticle = createAsyncThunk(
     return data;
   },
 );
-
-export const { setSearchedArticles } = articlesSlice.actions;
 
 export default articlesSlice.reducer;
