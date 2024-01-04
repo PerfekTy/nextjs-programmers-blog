@@ -1,6 +1,6 @@
 import { ArticleItem } from "@/components/articles/article-item";
 import { ArticleCategory } from "@/components/articles/article-category";
-import { Article } from "@/app/utlis/definitions";
+import { Article } from "@/app/utils/definitions";
 
 type ArticleListProps = {
   sortedArticles: Article[] | undefined;

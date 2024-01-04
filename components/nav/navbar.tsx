@@ -10,10 +10,10 @@ import { Spin } from "hamburger-react";
 export function Navbar({
   isMobile,
   setIsMobile,
-}: {
+}: Readonly<{
   isMobile: boolean;
   setIsMobile: (isMobile: boolean) => void;
-}) {
+}>) {
   const [isSearch, setIsSearch] = useState(false);
 
   return (
@@ -53,7 +53,7 @@ export function Navbar({
           <MotionButton
             content="Create post"
             variant="ghost"
-            style="px-4 h-[2.2rem] hover:bg-[#4f46e5] border border-[#4f46e5] hover:text-white text-[#4f46e5]"
+            style="px-4 h-[2.2rem] hover:bg-violet border border-violet hover:text-white text-violet"
           />
         </div>
       </div>

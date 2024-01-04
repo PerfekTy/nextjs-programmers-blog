@@ -53,7 +53,7 @@ export const ArticleTitle = ({
 
   return (
     <>
-      {loading.articles ? (
+      {loading ? (
         <p className="text-center text-lg">Loading...</p>
       ) : (
         <div className="dark:bg-sidebar bg-white rounded-lg h-screen">

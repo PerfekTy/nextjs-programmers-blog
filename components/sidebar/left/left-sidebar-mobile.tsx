@@ -1,6 +1,5 @@
-import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { unicaOne } from "@/app/utlis/fonts";
+import { unicaOne } from "@/app/utils/fonts";
 
 import { Spin } from "hamburger-react";
 import { LeftSidebar } from "@/components/sidebar/left/left-sidebar";
@@ -8,10 +7,10 @@ import { LeftSidebar } from "@/components/sidebar/left/left-sidebar";
 export function LeftSidebarMobile({
   isMobile,
   setIsMobile,
-}: {
+}: Readonly<{
   isMobile: boolean;
   setIsMobile: (isMobile: boolean) => void;
-}) {
+}>) {
   return (
     <AnimatePresence>
       {isMobile && (

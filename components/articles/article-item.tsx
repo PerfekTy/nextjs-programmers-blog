@@ -5,9 +5,9 @@ import { useMemo } from "react";
 import formatDistanceToNow from "date-fns/esm/formatDistanceToNow";
 
 import { Avatar } from "@/components/ui/avatar";
-import { montserrat } from "@/app/utlis/fonts";
+import { montserrat } from "@/app/utils/fonts";
 
-import { Article } from "@/app/utlis/definitions";
+import { Article } from "@/app/utils/definitions";
 
 export const ArticleItem = ({ article }: { article: Article }) => {
   const router = useRouter();
@@ -52,7 +52,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
             />
             <div>
               <p
-                className="cursor-pointer"
+                className="cursor-pointer hover:dark:bg-button_active w-fit hover:bg-button_active2"
                 onClick={(e) => {
                   e.stopPropagation();
                   router.push(`/article/${article.author}`);

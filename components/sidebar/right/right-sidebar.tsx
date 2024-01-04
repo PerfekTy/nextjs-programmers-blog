@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect } from "react";
 import Link from "next/link";
 
@@ -24,9 +26,12 @@ export const RightSidebar = () => {
             <Link
               href={`/tags/${tag.tag}`}
               key={key}
-              className="px-2 py-3 hover:dark:bg-button_active hover:bg-button_active2 hover:rounded-lg"
+              className="flex items-center px-2 py-3 hover:dark:bg-sidebar_item_dark hover:bg-sidebar_item hover:rounded-lg"
             >
-              {"#" + tag.tag}
+              <p>#{tag.tag}</p>
+              <p className="ml-auto border border-violet rounded-lg px-2">
+                {key + 1}
+              </p>
             </Link>
           ))}
 

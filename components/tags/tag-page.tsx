@@ -1,4 +1,4 @@
-import { Article } from "@/app/utlis/definitions";
+import { Article } from "@/app/utils/definitions";
 
 import { ArticleItem } from "@/components/articles/article-item";
 
