@@ -6,12 +6,13 @@ type TagsPageProps = {
   searchParams?: { searchQuery?: string };
 };
 
+
 export default async function ArticleTagPage({
   params,
   searchParams,
 }: TagsPageProps) {
   const searchQuery = searchParams?.searchQuery ?? params.tag;
-  const filteredArticles = await filteredArticlesByTags(searchQuery);
+  const filteredArticles = await filteredArticlesByTags(params.tag);
 
   return (
     <TagPage searchQuery={searchQuery} filteredArticles={filteredArticles} />

@@ -4,7 +4,7 @@ import { inter } from "@/app/utils/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { ReduxProvider } from "@/redux/provider";
-
+import { ClerkProvider } from "@clerk/nextjs";
 export const metadata: Metadata = {
   title: {
     template: "%s | PB",
@@ -22,17 +22,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReduxProvider>
-          <Toaster />
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-        </ReduxProvider>
+        <ClerkProvider>
+          <ReduxProvider>
+            <Toaster />
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </ReduxProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

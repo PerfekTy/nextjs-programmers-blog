@@ -11,7 +11,7 @@ const getTopTags = async () => {
       const tagName = String(tag).toLowerCase();
       tagCounts[tagName] = (tagCounts[tagName] || 0) + 1;
     });
-  });
+});	
 
   const tagsWithCounts = Object.keys(tagCounts).map((tag) => ({
     tag,
