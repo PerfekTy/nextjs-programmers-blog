@@ -10,10 +10,17 @@ export default async function ArticleTagPage({
   params,
   searchParams,
 }: TagsPageProps) {
-  const searchQuery = searchParams?.searchQuery ?? params.tag;
-  const filteredArticles = await filteredArticlesByTags(searchQuery);
+  const searchQuery = searchParams?.searchQuery ?? "";
+  const filteredArticles = await filteredArticlesByTags(
+    searchQuery,
+    params.tag,
+  );
 
   return (
-    <TagPage searchQuery={searchQuery} filteredArticles={filteredArticles} />
+    <TagPage
+      searchQuery={searchQuery}
+      filteredArticles={filteredArticles}
+      tag={params.tag}
+    />
   );
 }
