@@ -15,9 +15,9 @@ export const ReactionsTab = ({
   const [isLiked, setIsLiked] = useState(false);
 
   return (
-    <div className="flex gap-7 text-[12px] flex-col lg:flex-row md:text-sm font-light text-muted-foreground">
+    <div className="flex flex-col gap-7 text-[12px] font-light text-muted-foreground md:text-sm lg:flex-row">
       <form
-        className="flex flex-col items-center gap-1 cursor-pointer"
+        className="flex cursor-pointer flex-col items-center gap-1"
         data-title="Like"
         onClick={() => setIsLiked(!isLiked)}
       >
@@ -30,7 +30,7 @@ export const ReactionsTab = ({
       </form>
 
       <form
-        className="flex flex-col items-center gap-1 cursor-pointer"
+        className="flex cursor-pointer flex-col items-center gap-1"
         data-title="Save"
         onClick={() => setIsBookmarked(!isBookmarked)}
       >
@@ -43,7 +43,7 @@ export const ReactionsTab = ({
       </form>
 
       <span
-        className="flex flex-col items-center gap-1 cursor-pointer hover:text-[#f59e0b]"
+        className="flex cursor-pointer flex-col items-center gap-1 hover:text-[#f59e0b]"
         data-title="Jump to comments"
       >
         <MessageSquare />
@@ -51,7 +51,7 @@ export const ReactionsTab = ({
       </span>
 
       <span
-        className="flex flex-col items-center gap-1 cursor-pointer"
+        className="flex cursor-pointer flex-col items-center gap-1"
         data-title="More options"
       >
         <MoreHorizontal />

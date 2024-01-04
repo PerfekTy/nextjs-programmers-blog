@@ -30,7 +30,7 @@ const articlesSlice = createSlice({
         (state, action: PayloadAction<Article[]>) => {
           state.articles = [...action.payload];
           state.loading = false;
-        }
+        },
       );
   },
 });
@@ -40,7 +40,7 @@ export const fetchArticle = createAsyncThunk(
   async (title: string) => {
     const { data } = await axios.get(`/api/articles/${title}`);
     return data;
-  }
+  },
 );
 
 export const { setSearchedArticles } = articlesSlice.actions;

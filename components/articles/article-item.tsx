@@ -39,7 +39,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
       className="m-3 cursor-pointer rounded-lg shadow"
       onClick={() => router.push(`/article/${article.author}/${article.title}`)}
     >
-      <div className="rounded-lg dark:bg-sidebar bg-white dark:border-none border">
+      <div className="rounded-lg border bg-white dark:border-none dark:bg-sidebar">
         <div className="flex items-center">
           <div className="flex items-center gap-3 px-5 py-3">
             {/* Avatar */}
@@ -52,7 +52,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
             />
             <div>
               <p
-                className="cursor-pointer hover:dark:bg-button_active w-fit hover:bg-button_active2"
+                className="w-fit cursor-pointer hover:bg-button_active2 hover:dark:bg-button_active"
                 onClick={(e) => {
                   e.stopPropagation();
                   router.push(`/article/${article.author}`);
@@ -60,14 +60,14 @@ export const ArticleItem = ({ article }: { article: Article }) => {
               >
                 {article.author}
               </p>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-sm text-muted-foreground">
                 {createdAt} ({formatDistanceCreatedAt})
               </p>
             </div>
           </div>
         </div>
-        <div className="px-16 pb-3 flex flex-col gap-3">
-          <h1 className="text-3xl font-bold hover:dark:text-button_text hover:text-button_active">
+        <div className="flex flex-col gap-3 px-16 pb-3">
+          <h1 className="text-3xl font-bold hover:text-button_active hover:dark:text-button_text">
             {article.title}
           </h1>
           <span className="flex gap-3 text-sm text-muted-foreground">

@@ -22,7 +22,7 @@ export const ArticleTitle = ({
   const { articleTitle, username } = params;
   const dispatch = useDispatch<AppDispatch>();
   const { articles, loading } = useSelector(
-    (state: RootState) => state.articles
+    (state: RootState) => state.articles,
   );
 
   const createdAt = useMemo(() => {
@@ -56,7 +56,7 @@ export const ArticleTitle = ({
       {loading ? (
         <p className="text-center text-lg">Loading...</p>
       ) : (
-        <div className="dark:bg-sidebar bg-white rounded-lg h-screen">
+        <div className="h-screen rounded-lg bg-white dark:bg-sidebar">
           {/* BANNER */}
           <Image
             src="/assets/images/next.png"
@@ -67,7 +67,7 @@ export const ArticleTitle = ({
           />
           <div className="p-3 md:p-8">
             {/* AUTHOR */}
-            <div className="flex items-center gap-2 pb-4 relative">
+            <div className="relative flex items-center gap-2 pb-4">
               <Avatar
                 src="/us.jpg"
                 isMedium
@@ -76,7 +76,7 @@ export const ArticleTitle = ({
 
               <span>
                 <p
-                  className="font-bold cursor-pointer"
+                  className="cursor-pointer font-bold"
                   onClick={() => router.push(`/${articles[0]?.author}`)}
                 >
                   {articles[0]?.author}
@@ -93,7 +93,7 @@ export const ArticleTitle = ({
 
             {/* ARTICLE */}
             <article className="py-2">
-              <h1 className="text-3xl md:text-[36px] font-black tracking-widest leading-10 pb-2 pr-10 md:pr-0">
+              <h1 className="pb-2 pr-10 text-3xl font-black leading-10 tracking-widest md:pr-0 md:text-[36px]">
                 {articles[0]?.title}
               </h1>
               <span className="flex gap-3 text-sm text-muted-foreground">

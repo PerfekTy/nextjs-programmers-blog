@@ -19,14 +19,14 @@ export function LeftSidebarMobile({
           animate={{ x: 0 }}
           exit={{ x: -300 }}
           transition={{ type: "just", ease: "easeInOut" }}
-          className="fixed left-0 top-0 h-screen w-[300px] dark:bg-sidebar bg-white border-r z-50"
+          className="fixed left-0 top-0 z-50 h-screen w-[300px] border-r bg-white dark:bg-sidebar"
         >
-          <div className="flex justify-between md:hidden items-center">
-            <h1 className={`${unicaOne.className} text-center ml-4 text-2xl`}>
+          <div className="flex items-center justify-between md:hidden">
+            <h1 className={`${unicaOne.className} ml-4 text-center text-2xl`}>
               Programmers Blog
             </h1>
             <div
-              className="hover:bg-sidebar_item hover:dark:bg-sidebar_item_dark rounded-bl-lg rounded-tl-lg"
+              className="rounded-bl-lg rounded-tl-lg hover:bg-sidebar_item hover:dark:bg-sidebar_item_dark"
               onClick={() => setIsMobile(!isMobile)}
             >
               <Spin size={18} duration={0.5} toggled={isMobile} />

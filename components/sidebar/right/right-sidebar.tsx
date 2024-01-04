@@ -16,20 +16,20 @@ export const RightSidebar = () => {
   }, [dispatch]);
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <h2 className="font-bold text-2xl pt-3 pb-1 px-0 border-b-2 w-full text-center">
+    <div className="flex flex-col items-center justify-center">
+      <h2 className="w-full border-b-2 px-0 pb-1 pt-3 text-center text-2xl font-bold">
         Trending Tags
       </h2>
-      <ul className="flex flex-col text-center w-full text-lg pt-2">
+      <ul className="flex w-full flex-col pt-2 text-center text-lg">
         {!loading &&
           tags.map((tag, key) => (
             <Link
               href={`/tags/${tag.tag}`}
               key={key}
-              className="flex items-center px-2 py-3 hover:dark:bg-sidebar_item_dark hover:bg-sidebar_item hover:rounded-lg"
+              className="flex items-center px-2 py-3 hover:rounded-lg hover:bg-sidebar_item hover:dark:bg-sidebar_item_dark"
             >
               <p>#{tag.tag}</p>
-              <p className="ml-auto border border-violet rounded-lg px-2">
+              <p className="ml-auto rounded-lg border border-violet px-2">
                 {key + 1}
               </p>
             </Link>

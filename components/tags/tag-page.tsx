@@ -20,7 +20,7 @@ export const TagPage = ({
   return (
     <div className="px-4 pt-2">
       {searchQuery && (
-        <span className="flex gap-2 items-end text-3xl">
+        <span className="flex items-end gap-2 text-3xl">
           <h1 className="text-muted-foreground">Searched for tag: </h1>
           <p className="text3">#{tag}</p>
         </span>

@@ -23,10 +23,10 @@ export function SearchField() {
 
   return (
     <div className="w-full">
-      <div className="flex flex-col relative items-center mx-5 mb-4 md:mb-0 md:mr-5 md:ml-0">
+      <div className="relative mx-5 mb-4 flex flex-col items-center md:mb-0 md:ml-0 md:mr-5">
         <Search className="absolute left-3 top-2" />
         <Input
-          className="pl-10 py-5 dark:bg-black shadow"
+          className="py-5 pl-10 shadow dark:bg-black"
           name="searchedValue"
           onChange={(e) => handleSearch(e.target.value)}
           defaultValue={searchParams.get("searchQuery")?.toString()}

@@ -28,7 +28,7 @@ export function ArticleCategory() {
   };
 
   return (
-    <div className="flex gap-5 ml-3">
+    <div className="ml-3 flex gap-5">
       <MotionButton
         variant="ghost"
         style={`hover:bg-button_active2 hover:dark:bg-button_active cursor-pointer text-lg font-normal 

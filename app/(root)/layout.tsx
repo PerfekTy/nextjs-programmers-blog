@@ -8,7 +8,9 @@ import { ToggleTheme } from "@/components/ui/toggle-theme";
 import { LeftSidebarMobile } from "@/components/sidebar/left/left-sidebar-mobile";
 import { RightSidebar } from "@/components/sidebar/right/right-sidebar";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
   const [isMobile, setIsMobile] = useState(false);
 
   return (
@@ -16,17 +18,17 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <nav>
         <Navbar setIsMobile={setIsMobile} isMobile={isMobile} />
       </nav>
-      <article className="flex justify-center 2xl:mx-[20%] md:mt-0">
+      <article className="flex justify-center md:mt-0 2xl:mx-[20%]">
         <LeftSidebarMobile setIsMobile={setIsMobile} isMobile={isMobile} />
         <div className="hidden md:block">
           <LeftSidebar />
         </div>
-        <article className="w-full m-2 h-screen">{children}</article>
-        <section className="w-[300px] justify-center lg:block hidden">
+        <article className="m-2 h-screen w-full">{children}</article>
+        <section className="hidden w-[300px] justify-center lg:block">
           <RightSidebar />
         </section>
       </article>
-      <footer className="w-full flex justify-center border">
+      <footer className="flex w-full justify-center border">
         <ToggleTheme />
       </footer>
     </main>

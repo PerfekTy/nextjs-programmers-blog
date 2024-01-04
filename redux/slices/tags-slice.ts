@@ -28,7 +28,7 @@ const tagsSlice = createSlice({
         (state, action: PayloadAction<{ tag: string; count: number }[]>) => {
           state.tags = [...action.payload];
           state.loading = false;
-        }
+        },
       );
   },
 });

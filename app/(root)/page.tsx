@@ -1,7 +1,7 @@
 import { ArticleList } from "@/components/articles/article-list";
 import { fetchFilteredArticles, fetchSortedArticles } from "../utils/data";
 
-export default async function Home({
+export default async function HomePage({
   searchParams,
 }: Readonly<{
   searchParams?: {

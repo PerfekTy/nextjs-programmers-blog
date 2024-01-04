@@ -14,7 +14,7 @@ export const LeftSidebar = () => {
       {routes.map((route) => (
         <div
           key={route.href}
-          className="p-4 hover:bg-sidebar_item hover:text-sidebar_item_dark hover:dark:bg-sidebar_item_dark hover:dark:text-sidebar_item md:w-[250px] cursor-pointer w-full"
+          className="w-full cursor-pointer p-4 hover:bg-sidebar_item hover:text-sidebar_item_dark hover:dark:bg-sidebar_item_dark hover:dark:text-sidebar_item md:w-[250px]"
           onClick={() => router.push(route.href)}
         >
           <div className="flex items-center gap-5">
@@ -30,14 +30,14 @@ export const LeftSidebar = () => {
           </div>
         </div>
       ))}
-      <div className="dark:bg-sidebar_item_dark bg-sidebar_item mx-2 md:dark:bg-sidebar md:bg-white mt-2 py-2 rounded-lg shadow">
-        <span className="text-sm font-light text-center flex flex-col gap-1">
+      <div className="mx-2 mt-2 rounded-lg bg-sidebar_item py-2 shadow dark:bg-sidebar_item_dark md:bg-white md:dark:bg-sidebar">
+        <span className="flex flex-col gap-1 text-center text-sm font-light">
           <h2 className="text-[16px] font-bold">
             {"Don't have an account yet?"}
           </h2>
           <Link
             href="#"
-            className="text-muted-foreground dark:text-[#88dcf8] text-[#3a3cba] font-semibold"
+            className="font-semibold text-[#3a3cba] text-muted-foreground dark:text-[#88dcf8]"
           >
             Create one and stay up to date!
           </Link>

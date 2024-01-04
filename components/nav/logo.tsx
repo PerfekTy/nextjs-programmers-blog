@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
@@ -7,7 +9,7 @@ export function Logo() {
 
   return (
     <div
-      className="flex items-center justify-center gap-3 cursor-pointer"
+      className="flex cursor-pointer items-center justify-center gap-3"
       onClick={() => router.push("/")}
     >
       <Image
@@ -16,7 +18,7 @@ export function Logo() {
         width={30}
         height={30}
         priority
-        className="dark:block hidden"
+        className="hidden dark:block"
       />
       <motion.div
         initial={{ y: -70 }}
@@ -29,7 +31,7 @@ export function Logo() {
           alt="programmers-blog logo"
           width={300}
           height={300}
-          className="dark:block hidden"
+          className="hidden dark:block"
         />
       </motion.div>
       <Image
@@ -38,7 +40,7 @@ export function Logo() {
         width={30}
         height={30}
         priority
-        className="dark:hidden block"
+        className="block dark:hidden"
       />
       <motion.div
         initial={{ y: -70 }}
@@ -51,7 +53,7 @@ export function Logo() {
           width={300}
           priority
           height={300}
-          className="dark:hidden block"
+          className="block dark:hidden"
         />
       </motion.div>
     </div>
