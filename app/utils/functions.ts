@@ -1,11 +1,20 @@
 import { fetchArticles } from "./data";
 
-export const filteredArticlesByTags = async (serachQuery: string) => {
+export const filteredArticlesByTags = async (
+  serachQuery: string,
+  params: string,
+) => {
   const articles = await fetchArticles();
 
-  const filteredArticles = articles.filter((article) =>
-    article.tags.includes(serachQuery),
-  );
+  if (serachQuery) {
+    return articles.filter(
+      (article) =>
+        article.title.includes(serachQuery) ||
+        article.author.includes(serachQuery),
+    );
+  }
 
-  return filteredArticles;
+  if (params) {
+    return articles.filter((article) => article.tags.includes(params));
+  }
 };
