@@ -5,9 +5,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { routes } from "@/components/sidebar/left/routes";
+import { useAuth } from "@clerk/nextjs";
 
 export const LeftSidebar = () => {
   const router = useRouter();
+  const { userId } = useAuth();
 
   return (
     <>
@@ -30,19 +32,21 @@ export const LeftSidebar = () => {
           </div>
         </div>
       ))}
-      <div className="mx-2 mt-2 rounded-lg bg-sidebar_item py-2 shadow dark:bg-sidebar_item_dark md:bg-white md:dark:bg-sidebar">
-        <span className="flex flex-col gap-1 text-center text-sm font-light">
-          <h2 className="text-[16px] font-bold">
-            {"Don't have an account yet?"}
-          </h2>
-          <Link
-            href="#"
-            className="font-semibold text-[#3a3cba] text-muted-foreground dark:text-[#88dcf8]"
-          >
-            Create one and stay up to date!
-          </Link>
-        </span>
-      </div>
+      {!userId && (
+        <div className="mx-2 mt-2 rounded-lg bg-sidebar_item py-2 shadow dark:bg-sidebar_item_dark md:bg-white md:dark:bg-sidebar">
+          <span className="flex flex-col gap-1 text-center text-sm font-light">
+            <h2 className="text-[16px] font-bold">
+              {"Don't have an account yet?"}
+            </h2>
+            <Link
+              href="/sign-up"
+              className="font-semibold text-[#3a3cba] text-muted-foreground dark:text-[#88dcf8]"
+            >
+              Create one and stay up to date!
+            </Link>
+          </span>
+        </div>
+      )}
     </>
   );
 };

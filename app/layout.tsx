@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { ReduxProvider } from "@/redux/provider";
 import { ClerkProvider } from "@clerk/nextjs";
+
 export const metadata: Metadata = {
   title: {
     template: "%s | PB",
@@ -20,9 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-        <ClerkProvider>
-    <html lang="en">
-      <body className={inter.className}>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+    >
+      <html lang="en">
+        <body className={inter.className}>
           <ReduxProvider>
             <Toaster />
             <ThemeProvider
@@ -34,8 +37,8 @@ export default function RootLayout({
               {children}
             </ThemeProvider>
           </ReduxProvider>
-      </body>
-    </html>
-      </ClerkProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
