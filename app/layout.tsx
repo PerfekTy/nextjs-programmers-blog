@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { ReduxProvider } from "@/redux/provider";
 import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 
 export const metadata: Metadata = {
   title: {
@@ -23,6 +24,14 @@ export default function RootLayout({
   return (
     <ClerkProvider
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      appearance={{
+        baseTheme: dark,
+        layout: {
+          logoImageUrl: "/assets/logos/clerk-logo.png",
+          socialButtonsPlacement: "bottom",
+          socialButtonsVariant: "blockButton",
+        },
+      }}
     >
       <html lang="en">
         <body className={inter.className}>
