@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { FormState, createArticleAction } from "./actions";
 import { Tags } from "./tags";
 import { TextAreaForm } from "./textarea-form";
-import { useDebouncedCallback } from "use-debounce";
 
 export default function CreateArticlePage() {
   const [tag, setTag] = useState("");
@@ -25,7 +24,7 @@ export default function CreateArticlePage() {
     },
   } as FormState);
 
-  const handleTagsChange = useDebouncedCallback((e?: any) => {
+  const handleTagsChange = () => {
     if (!/^[a-z]{2,}(?:, [a-z]{2,})*$/.test(tag)) {
       formState.errors.tags = "No match with required format!";
       setIsValidForm(false);
@@ -33,18 +32,7 @@ export default function CreateArticlePage() {
       formState.errors.tags = undefined;
       setIsValidForm(true);
     }
-    if (e) setTag(e.target.value);
-  }, 300);
-
-  useEffect(() => {
-    if (!formState.text.trim() || !formState.title.trim()) {
-      setIsValidForm(false);
-      formState.errors.message = "Title and article content are required!";
-    } else {
-      formState.errors.message = undefined;
-      setIsValidForm(true);
-    }
-  }, [formState.text, formState.title]);
+  };
 
   return (
     <div className="mx-5 lg:mx-[15%]">
@@ -53,7 +41,7 @@ export default function CreateArticlePage() {
       </div>
       <form
         action={actionDispatch}
-        className="relative mt-32 flex flex-col gap-10 rounded-lg bg-white py-5 dark:bg-sidebar"
+        className="relative flex flex-col gap-10 rounded-lg bg-white py-5 dark:bg-sidebar"
       >
         <div>
           <div className="px-5 md:px-10">
@@ -83,7 +71,10 @@ export default function CreateArticlePage() {
                 className="my-3 h-fit rounded-none border-b-2 bg-transparent text-sm font-semibold outline-none transition-all placeholder:text-muted-foreground placeholder:opacity-50 focus:border-b-4 focus:border-violet md:text-lg"
                 placeholder="Add your tags here..."
                 name="tags"
-                onChange={handleTagsChange}
+                onChange={(e) => {
+                  setTag(e.target.value);
+                  handleTagsChange();
+                }}
                 value={tag}
               />
               {formState.errors.tags ? (

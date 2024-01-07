@@ -8,9 +8,30 @@ import { TagItemSkeleton } from "../skeletons";
 export const Tags = ({ setTag }: { setTag: (tag: any) => void }) => {
   const { tags, loading } = useSelector((state: RootState) => state.tags);
   const dispatch = useDispatch<AppDispatch>();
-  const [choosenTag, setChoosenTag] = useState<
+  const [chosenTag, setChosenTag] = useState<
     { tag: string; selected: boolean }[]
   >([]);
+
+  const handleTagClick = (key: number) => {
+    setChosenTag((prevState) => {
+      const newChosenTag = [...prevState];
+      const clickedTag = [...newChosenTag];
+
+      newChosenTag[key].selected = !clickedTag[key].selected;
+
+      if (newChosenTag[key].selected) {
+        setTag((prevState: string) => `${prevState + chosenTag[key].tag}, `);
+      }
+
+      if (!newChosenTag[key].selected) {
+        setTag((prevState: string) =>
+          prevState.replace(chosenTag[key].tag + ", ", ""),
+        );
+      }
+
+      return newChosenTag;
+    });
+  };
 
   useEffect(() => {
     dispatch(fetchTags());
@@ -19,7 +40,7 @@ export const Tags = ({ setTag }: { setTag: (tag: any) => void }) => {
   useEffect(() => {
     if (tags) {
       const tagsBools = tags.map((tag) => ({ tag: tag.tag, selected: false }));
-      setChoosenTag(tagsBools);
+      setChosenTag(tagsBools);
     }
   }, [tags]);
 
@@ -32,23 +53,11 @@ export const Tags = ({ setTag }: { setTag: (tag: any) => void }) => {
             type="button"
             key={tag.tag}
             className={`border shadow hover:bg-[#e3e3e3] dark:hover:bg-[#262626] ${
-              choosenTag[key] && choosenTag[key].selected
+              chosenTag[key] && chosenTag[key].selected
                 ? "bg-[#e3e3e3] dark:bg-[#262626]"
-                : ""
+                : "bg-transparent"
             }`}
-            onClick={() => {
-              setChoosenTag((prevState) => {
-                const newChoosenTag = [...prevState];
-                newChoosenTag[key].selected = true;
-                if (choosenTag[key].selected) {
-                  setTag(
-                    (prevState: string) =>
-                      `${prevState + choosenTag[key].tag}, `,
-                  );
-                }
-                return newChoosenTag;
-              });
-            }}
+            onClick={() => handleTagClick(key)}
           >
             #{tag.tag}
           </Button>
@@ -56,6 +65,8 @@ export const Tags = ({ setTag }: { setTag: (tag: any) => void }) => {
       ) : (
         <TagItemSkeleton />
       )}
+
+      {!tags.length && !loading ? <p>There is no tags 😔</p> : null}
     </div>
   );
 };

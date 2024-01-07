@@ -3,7 +3,7 @@ import { ArticleCategory } from "@/components/articles/article-category";
 
 import { Article } from "@/app/utils/definitions";
 
-export const ArticleList = ({ articles }: { articles: Article[] }) => {
+export async function ArticleList({ articles }: { articles: Article[] }) {
   return (
     <>
       <ArticleCategory />
@@ -13,4 +13,4 @@ export const ArticleList = ({ articles }: { articles: Article[] }) => {
       ))}
     </>
   );
-};
+}

@@ -1,6 +1,5 @@
 import { ArticleList } from "@/components/articles/article-list";
 import { fetchArticles } from "../utils/data";
-import { UserButton } from "@clerk/nextjs";
 
 export default async function HomePage({
   searchParams,

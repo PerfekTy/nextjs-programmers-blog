@@ -10,7 +10,7 @@ import { montserrat } from "@/app/utils/fonts";
 import { Article } from "@/app/utils/definitions";
 
 export const ArticleItem = ({ article }: { article: Article }) => {
-  const router = useRouter();
+  const { push } = useRouter();
 
   const createdAt = useMemo(() => {
     if (!article.createdAt) {
@@ -37,17 +37,16 @@ export const ArticleItem = ({ article }: { article: Article }) => {
   return (
     <div
       className="m-3 cursor-pointer rounded-lg shadow"
-      onClick={() => router.push(`/article/${article.author}/${article.title}`)}
+      onClick={() => push(`/article/${article.author}/${article.title}`)}
     >
       <div className="rounded-lg border bg-white dark:border-none dark:bg-sidebar">
         <div className="flex items-center">
           <div className="flex items-center gap-3 px-5 py-3">
-            {/* Avatar */}
             <Avatar
-              src="/us.jpg"
+              src={article.authorImage ? article.authorImage : ""}
               onClick={(e) => {
                 e.stopPropagation();
-                router.push(`/article/${article.author}`);
+                push(`/article/${article.author}`);
               }}
             />
             <div>
@@ -55,7 +54,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
                 className="w-fit cursor-pointer hover:bg-button_active2 hover:dark:bg-button_active"
                 onClick={(e) => {
                   e.stopPropagation();
-                  router.push(`/article/${article.author}`);
+                  push(`/article/${article.author}`);
                 }}
               >
                 {article.author}
@@ -68,7 +67,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
         </div>
         <div className="flex flex-col gap-3 px-16 pb-3">
           <h1 className="text-3xl font-bold hover:text-button_active hover:dark:text-button_text">
-            {article.title}
+            {article.title.replaceAll("-", " ")}
           </h1>
           <span className="flex gap-3 text-sm text-muted-foreground">
             {article.tags.map((tag: string) => (

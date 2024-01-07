@@ -11,7 +11,8 @@ export const GET = async (req: NextRequest) => {
 
     if (title) {
       const data = await db.query.articles.findMany({
-        where: (articles, { eq }) => eq(articles.title, title),
+        where: (articles, { eq }) =>
+          eq(articles.title, title.replaceAll("%20", " ")),
       });
 
       return new Response(JSON.stringify(data), { status: 200 });

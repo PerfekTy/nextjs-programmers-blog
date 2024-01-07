@@ -18,7 +18,7 @@ export const ArticleTitle = ({
 }: {
   params: { articleTitle: string; username: string };
 }) => {
-  const router = useRouter();
+  const { push } = useRouter();
   const { articleTitle, username } = params;
   const dispatch = useDispatch<AppDispatch>();
   const { articles, loading } = useSelector(
@@ -57,7 +57,6 @@ export const ArticleTitle = ({
         <p className="text-center text-lg">Loading...</p>
       ) : (
         <div className="h-screen rounded-lg bg-white dark:bg-sidebar">
-          {/* BANNER */}
           <Image
             src="/assets/images/next.png"
             alt="nextjs"
@@ -69,15 +68,15 @@ export const ArticleTitle = ({
             {/* AUTHOR */}
             <div className="relative flex items-center gap-2 pb-4">
               <Avatar
-                src="/us.jpg"
+                src={articles[0]?.authorImage ? articles[0].authorImage : ""}
                 isMedium
-                onClick={() => router.push(`/${articles[0]?.author}`)}
+                onClick={() => push(`/${articles[0]?.author}`)}
               />
 
               <span>
                 <p
                   className="cursor-pointer font-bold"
-                  onClick={() => router.push(`/${articles[0]?.author}`)}
+                  onClick={() => push(`/${articles[0]?.author}`)}
                 >
                   {articles[0]?.author}
                 </p>
@@ -94,7 +93,7 @@ export const ArticleTitle = ({
             {/* ARTICLE */}
             <article className="py-2">
               <h1 className="pb-2 pr-10 text-3xl font-black leading-10 tracking-widest md:pr-0 md:text-[36px]">
-                {articles[0]?.title}
+                {articles[0]?.title.replaceAll("-", " ")}
               </h1>
               <span className="flex gap-3 text-sm text-muted-foreground">
                 {articles[0]?.tags.map((tag: string) => (
