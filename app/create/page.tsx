@@ -58,17 +58,17 @@ export default function CreateArticlePage() {
               defaultValue={formState.title}
             />
             <fieldset className="flex flex-col pt-5">
-              <span className="flex gap-1 ">
+              <span className="flex gap-1 text-sm md:text-base">
                 Required format:
                 <p className="text-violet">webdev, programming</p> etc.
               </span>
-              <p className="pb-3">
+              <p className="pb-3 text-sm md:text-base">
                 Choose from available tags or add a new one.
               </p>
               <Tags setTag={setTag} />
               <input
                 type="text"
-                className="my-3 h-fit rounded-none border-b-2 bg-transparent text-sm font-semibold outline-none transition-all placeholder:text-muted-foreground placeholder:opacity-50 focus:border-b-4 focus:border-violet md:text-lg"
+                className="my-3 h-fit w-full rounded-none border-b-2 bg-transparent text-sm font-semibold outline-none transition-all placeholder:text-muted-foreground placeholder:opacity-50 focus:border-b-4 focus:border-violet md:text-lg"
                 placeholder="Add your tags here..."
                 name="tags"
                 onChange={(e) => {
