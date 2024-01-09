@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import MarkDown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import formatDistanceToNow from "date-fns/esm/formatDistanceToNow";
 
@@ -12,6 +14,7 @@ import { fetchArticle } from "@/redux/slices/articles-slice";
 
 import { Avatar } from "@/components/ui/avatar";
 import { ReactionsTab } from "@/components/reactions-tab";
+import { montserrat } from "@/app/utils/fonts";
 
 export const ArticleTitle = ({
   params,
@@ -102,7 +105,11 @@ export const ArticleTitle = ({
                   </p>
                 ))}
               </span>
-              <p className="mt-5">{articles[0]?.text}</p>
+              <p className={`${montserrat.className} mt-5`}>
+                <MarkDown remarkPlugins={[remarkGfm]}>
+                  {articles[0]?.text}
+                </MarkDown>
+              </p>
             </article>
           </div>
         </div>

@@ -8,6 +8,8 @@ import { Avatar } from "@/components/ui/avatar";
 import { montserrat } from "@/app/utils/fonts";
 
 import { Article } from "@/app/utils/definitions";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 export const ArticleItem = ({ article }: { article: Article }) => {
   const { push } = useRouter();
@@ -77,7 +79,7 @@ export const ArticleItem = ({ article }: { article: Article }) => {
             ))}
           </span>
           <text className={`${montserrat.className} line-clamp-3 text-[15px]`}>
-            {article.text}
+            <Markdown remarkPlugins={[remarkGfm]}>{article.text}</Markdown>
           </text>
         </div>
       </div>

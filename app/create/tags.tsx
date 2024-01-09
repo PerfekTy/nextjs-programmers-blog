@@ -4,6 +4,14 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { TagItemSkeleton } from "../skeletons";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { CheckIcon, MoreHorizontal } from "lucide-react";
 
 export const Tags = ({ setTag }: { setTag: (tag: any) => void }) => {
   const { tags, loading } = useSelector((state: RootState) => state.tags);
@@ -45,21 +53,24 @@ export const Tags = ({ setTag }: { setTag: (tag: any) => void }) => {
   }, [tags]);
 
   return (
-    <div className="flex gap-3">
+    <div className="grid grid-cols-3 sm:flex sm:items-center sm:gap-3">
       {!loading ? (
         tags.map((tag, key) => (
           <Button
             variant="ghost"
             type="button"
             key={tag.tag}
-            className={`border shadow hover:bg-[#e3e3e3] dark:hover:bg-[#262626] ${
+            className={`m-1 flex gap-2 border shadow hover:bg-[#e3e3e3] dark:hover:bg-[#262626] sm:m-0 ${
               chosenTag[key] && chosenTag[key].selected
                 ? "bg-[#e3e3e3] dark:bg-[#262626]"
                 : "bg-transparent"
             }`}
             onClick={() => handleTagClick(key)}
           >
-            #{tag.tag}
+            <p># {tag.tag}</p>
+            {chosenTag[key] && chosenTag[key].selected ? (
+              <CheckIcon size={15} color="limegreen" />
+            ) : null}
           </Button>
         ))
       ) : (

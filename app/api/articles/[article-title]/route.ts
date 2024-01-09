@@ -1,7 +1,9 @@
+import { unstable_noStore as noStore } from "next/cache";
 import { NextRequest } from "next/server";
 import { db } from "@/db";
 
 export const GET = async (req: NextRequest) => {
+  noStore();
   if (req.method !== "GET") {
     return;
   }

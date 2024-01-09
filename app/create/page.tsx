@@ -12,6 +12,7 @@ import { TextAreaForm } from "./textarea-form";
 
 export default function CreateArticlePage() {
   const [tag, setTag] = useState("");
+
   const [isValidForm, setIsValidForm] = useState(false);
 
   const [formState, actionDispatch] = useFormState(createArticleAction, {
@@ -86,12 +87,12 @@ export default function CreateArticlePage() {
             </fieldset>
           </div>
         </div>
-        <TextAreaForm text={formState.text} />
+        <TextAreaForm />
         <div className="absolute -bottom-16 right-0">
           <Button
             disabled={!isValidForm}
             variant="destructive"
-            className="mt-5 p-5"
+            className="my-3 p-5"
           >
             Create article
           </Button>
