@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useFormState } from "react-dom";
 
 import { Logo } from "@/components/nav/logo";
@@ -12,9 +12,7 @@ import { TextAreaForm } from "./textarea-form";
 
 export default function CreateArticlePage() {
   const [tag, setTag] = useState("");
-
   const [isValidForm, setIsValidForm] = useState(false);
-
   const [formState, actionDispatch] = useFormState(createArticleAction, {
     title: "",
     tags: "",

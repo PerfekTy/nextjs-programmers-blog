@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import MarkDown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeKatex from "rehype-katex";
 
 import formatDistanceToNow from "date-fns/esm/formatDistanceToNow";
 
@@ -106,7 +107,10 @@ export const ArticleTitle = ({
                 ))}
               </span>
               <p className={`${montserrat.className} mt-5`}>
-                <MarkDown remarkPlugins={[remarkGfm]}>
+                <MarkDown
+                  remarkPlugins={[remarkGfm]}
+                  rehypePlugins={[rehypeKatex]}
+                >
                   {articles[0]?.text}
                 </MarkDown>
               </p>

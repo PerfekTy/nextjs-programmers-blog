@@ -28,6 +28,20 @@ export const TextAreaForm = () => {
     setAreaText(e.target.value);
   };
 
+  const setCursorBetweenSymbols = (symbol: string, offset: number) => {
+    setAreaText((prevState) => prevState.concat(symbol));
+    setTimeout(() => {
+      if (areaRef.current) {
+        const textLength = areaRef.current.value.length;
+
+        areaRef.current.selectionStart = Math.max(0, textLength - offset);
+        areaRef.current.selectionEnd = Math.max(0, textLength - offset);
+
+        areaRef.current.focus();
+      }
+    }, 0);
+  };
+
   return (
     <>
       <div className="flex items-center gap-4 bg-[#f5f5f5] px-1 py-2 shadow dark:bg-[#030303] dark:shadow-[#030303] md:px-10">
@@ -36,10 +50,7 @@ export const TextAreaForm = () => {
           data-title="Bold text"
           className="aspect-square p-3 hover:bg-button_active2 hover:dark:bg-button_active sm:p-2"
           variant="ghost"
-          onClick={() => {
-            setAreaText((prevState) => prevState.concat("****"));
-            areaRef.current?.focus();
-          }}
+          onClick={() => setCursorBetweenSymbols("****", 2)}
         >
           <Bold />
         </Button>
@@ -48,6 +59,7 @@ export const TextAreaForm = () => {
           data-title="Italic text"
           className="aspect-square p-3 hover:bg-button_active2 hover:dark:bg-button_active sm:p-2"
           variant="ghost"
+          onClick={() => setCursorBetweenSymbols("**", 1)}
         >
           <Italic />
         </Button>
@@ -64,10 +76,7 @@ export const TextAreaForm = () => {
           data-title="Ordered list"
           className="aspect-square p-3 hover:bg-button_active2 hover:dark:bg-button_active sm:p-2"
           variant="ghost"
-          onClick={() => {
-            setAreaText((prevState) => prevState.concat("1. "));
-            areaRef.current?.focus();
-          }}
+          onClick={() => setCursorBetweenSymbols("1.", 0)}
         >
           <ListOrdered />
         </Button>
@@ -76,10 +85,7 @@ export const TextAreaForm = () => {
           data-title="Unordered list"
           className="aspect-square p-3 hover:bg-button_active2 hover:dark:bg-button_active sm:p-2"
           variant="ghost"
-          onClick={() => {
-            setAreaText((prevState) => prevState.concat("- "));
-            areaRef.current?.focus();
-          }}
+          onClick={() => setCursorBetweenSymbols("- ", 0)}
         >
           <List />
         </Button>
@@ -90,10 +96,7 @@ export const TextAreaForm = () => {
             data-title="Quote"
             className="aspect-square p-3 hover:bg-button_active2 hover:dark:bg-button_active sm:p-2"
             variant="ghost"
-            onClick={() => {
-              setAreaText((prevState) => prevState.concat("> "));
-              areaRef.current?.focus();
-            }}
+            onClick={() => setCursorBetweenSymbols("> ", 0)}
           >
             <QuoteIcon />
           </Button>
@@ -102,10 +105,7 @@ export const TextAreaForm = () => {
             data-title="Block of code"
             className="aspect-square p-3 hover:bg-button_active2 hover:dark:bg-button_active sm:p-2"
             variant="ghost"
-            onClick={() => {
-              setAreaText((prevState) => prevState.concat("` `"));
-              areaRef.current?.focus();
-            }}
+            onClick={() => setCursorBetweenSymbols("``", 1)}
           >
             <Code />
           </Button>
@@ -116,27 +116,24 @@ export const TextAreaForm = () => {
             variant="ghost"
           >
             <Image />
-            <Button
-              type="button"
-              data-title="Heading"
-              className="aspect-square p-3 hover:bg-button_active2 hover:dark:bg-button_active sm:p-2"
-              variant="ghost"
-              onClick={() => {
-                setAreaText((prevState) => prevState.concat("## "));
-                areaRef.current?.focus();
-              }}
-            >
-              <Heading />
-            </Button>
+          </Button>
+
+          <Button
+            type="button"
+            data-title="Heading"
+            className="aspect-square p-3 hover:bg-button_active2 hover:dark:bg-button_active sm:p-2"
+            variant="ghost"
+            onClick={() => setCursorBetweenSymbols("## ", 0)}
+          >
+            <Heading />
           </Button>
         </div>
         <div className="sm:hidden">
           <Select
             value={areaText}
-            onValueChange={(value) => {
-              setAreaText((prevState) => prevState.concat(value));
-              areaRef.current?.focus();
-            }}
+            onValueChange={(value) =>
+              setAreaText((prevState) => prevState.concat(value))
+            }
           >
             <SelectTrigger className="w-[70px]">
               <SelectValue placeholder={<MoreHorizontal />} />
@@ -147,7 +144,7 @@ export const TextAreaForm = () => {
                   <QuoteIcon size={17} /> <p>quote</p>
                 </div>
               </SelectItem>
-              <SelectItem value="` `">
+              <SelectItem value="``">
                 <div className="flex items-center gap-2">
                   <Code size={17} /> <p>code</p>
                 </div>

@@ -3,7 +3,6 @@
 import { db } from "@/db";
 import { articles } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs";
-import { redirect } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
 export type FormState = {
