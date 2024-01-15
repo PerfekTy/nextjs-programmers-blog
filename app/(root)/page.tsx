@@ -1,5 +1,5 @@
 import { ArticleList } from "@/components/articles/article-list";
-import { fetchArticles } from "../utils/data";
+import { getArticles } from "./actions";
 
 export default async function HomePage({
   searchParams,
@@ -12,7 +12,7 @@ export default async function HomePage({
   const searchQuery = searchParams?.searchQuery ?? "";
   const sortQuery = searchParams?.sortQuery ?? "";
 
-  const articles = await fetchArticles(searchQuery, sortQuery);
+  const articles = await getArticles(searchQuery, sortQuery);
 
   return (
     <>
@@ -23,7 +23,11 @@ export default async function HomePage({
         </span>
       )}
 
-      <ArticleList articles={articles} />
+      <ArticleList
+        articles={articles}
+        searchQuery={searchQuery}
+        sortQuery={sortQuery}
+      />
     </>
   );
 }
