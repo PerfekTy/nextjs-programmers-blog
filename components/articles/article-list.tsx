@@ -21,6 +21,7 @@ export function ArticleList({
   sortQuery: string;
 }) {
   const [loadedArticles, setLoadedArticles] = useState<Article[]>(articles);
+  const [showSkeleton, setShowSkeleton] = useState(true);
   const [page, setPage] = useState(1);
   const [ref, inView] = useInView();
 
@@ -30,16 +31,25 @@ export function ArticleList({
 
     if (articles?.length) {
       setPage(next);
-      setLoadedArticles((prev: Article[]) => [
+
+      return setLoadedArticles((prev: Article[]) => [
         ...(prev?.length ? prev : []),
         ...articles,
       ]);
     }
+    setShowSkeleton(false);
   }, [page, searchQuery, sortQuery]);
 
   useEffect(() => {
     if (inView) loadMoreArticles();
-  }, [articles, inView, loadMoreArticles]);
+  }, [inView, loadMoreArticles]);
+
+  useEffect(() => {
+    setLoadedArticles(articles);
+    if (searchQuery || sortQuery) {
+      setPage(1);
+    }
+  }, [articles, searchQuery, sortQuery]);
 
   return (
     <>
@@ -48,9 +58,11 @@ export function ArticleList({
         <ArticleItem key={article.id} article={article} />
       ))}
 
-      <div ref={ref} className="flex w-full justify-center">
-        <ArticleSkeleton />
-      </div>
+      {showSkeleton!! && (
+        <div ref={ref} className="flex w-full justify-center">
+          <ArticleSkeleton />
+        </div>
+      )}
     </>
   );
 }

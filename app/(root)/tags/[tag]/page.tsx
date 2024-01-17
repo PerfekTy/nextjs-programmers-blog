@@ -6,7 +6,6 @@ type TagsPageProps = {
   searchParams?: { searchQuery?: string };
 };
 
-
 export default async function ArticleTagPage({
   params,
   searchParams,

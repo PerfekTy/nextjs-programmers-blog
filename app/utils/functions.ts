@@ -1,16 +1,16 @@
-import { fetchArticles } from "./data";
+import { getArticles } from "../(root)/actions";
 
 export const filteredArticlesByTags = async (
-  serachQuery: string,
+  searchQuery: string,
   params: string,
 ) => {
-  const articles = await fetchArticles();
+  const articles = await getArticles(searchQuery);
 
-  if (serachQuery) {
+  if (searchQuery) {
     return articles.filter(
       (article) =>
-        article.title.includes(serachQuery) ||
-        article.author.includes(serachQuery),
+        article.title.includes(searchQuery) ||
+        article.author.includes(searchQuery),
     );
   }
 
