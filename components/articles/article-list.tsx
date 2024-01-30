@@ -49,6 +49,7 @@ export function ArticleList({
     if (searchQuery || sortQuery) {
       setPage(1);
     }
+    setPage(1);
   }, [articles, searchQuery, sortQuery]);
 
   return (
@@ -58,11 +59,9 @@ export function ArticleList({
         <ArticleItem key={article.id} article={article} />
       ))}
 
-      {showSkeleton!! && (
-        <div ref={ref} className="flex w-full justify-center">
-          <ArticleSkeleton />
-        </div>
-      )}
+      <div ref={ref} className="flex w-full justify-center">
+        {showSkeleton!! && <ArticleSkeleton />}
+      </div>
     </>
   );
 }

@@ -34,7 +34,7 @@ export default function CreateArticlePage() {
   };
 
   return (
-    <div className="mx-5 lg:mx-[15%]">
+    <div className="mx-5 lg:mx-[25%]">
       <div className="my-5">
         <Logo />
       </div>
@@ -44,9 +44,12 @@ export default function CreateArticlePage() {
       >
         <div>
           <div className="px-5 md:px-10">
-            <div className="pb-5">
+            <div className="flex items-center justify-between pb-5">
               <Button type="button" variant="default">
                 Add a cover image
+              </Button>
+              <Button type="button" variant="outline">
+                Show preview
               </Button>
             </div>
             <input

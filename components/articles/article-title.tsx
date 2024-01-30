@@ -17,6 +17,8 @@ import { Avatar } from "@/components/ui/avatar";
 import { ReactionsTab } from "@/components/reactions-tab";
 import { montserrat } from "@/app/utils/fonts";
 
+import styles from "@/app/markdown.module.css";
+
 export const ArticleTitle = ({
   params,
 }: {
@@ -108,6 +110,7 @@ export const ArticleTitle = ({
               </span>
               <p className={`${montserrat.className} mt-5`}>
                 <MarkDown
+                  className={styles.markdown}
                   remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeKatex]}
                 >

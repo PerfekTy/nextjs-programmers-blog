@@ -1,0 +1,56 @@
+.markdown p {
+  margin: 0 0 1.3rem;
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6 {
+  margin: 0;
+}
+
+.markdown h1 {
+  font-size: 2.625em;
+  line-height: 1.55;
+  font-weight: 900;
+}
+
+.markdown h2 {
+  font-size: 2em;
+  line-height: 1.58;
+  font-weight: 900;
+}
+
+.markdown h3 {
+  font-size: 1.625em;
+  line-height: 1.62;
+  font-weight: 900;
+}
+
+.markdown h4 {
+  font-size: 1.25em;
+  line-height: 1.65;
+  font-weight: 900;
+}
+
+.markdown h5 {
+  font-size: 1em;
+  line-height: 1.65;
+  font-weight: 700;
+}
+
+.markdown h6 {
+  font-size: 0.813em;
+  line-height: 1.77;
+  font-weight: 700;
+}
+
+.markdown ol {
+  list-style-type: decimal;
+}
+
+.markdown ul {
+  list-style-type: square;
+}

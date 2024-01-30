@@ -51,6 +51,7 @@ export const TagPage = ({
     if (searchQuery) {
       setPage(1);
     }
+    setPage(1);
   }, [filteredArticles, searchQuery]);
 
   return (
@@ -70,11 +71,9 @@ export const TagPage = ({
         <p className="text-center text-lg">No articles found 😔</p>
       )}
 
-      {showSkeleton!! && (
-        <div ref={ref} className="flex w-full justify-center">
-          <ArticleSkeleton />
-        </div>
-      )}
+      <div ref={ref} className="flex w-full justify-center">
+        {showSkeleton!! && <ArticleSkeleton />}
+      </div>
     </div>
   );
 };
