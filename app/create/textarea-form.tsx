@@ -54,7 +54,7 @@ export const TextAreaForm = () => {
 
   return (
     <>
-      <div className="flex items-center gap-4 bg-[#f5f5f5] px-1 py-2 shadow dark:bg-[#030303] dark:shadow-[#030303] md:px-10">
+      <div className="flex items-center gap-4 bg-[#f5f5f5] px-1 py-2 dark:bg-[#030303]">
         <EditorOption
           title="Headings"
           icon={<Heading />}
@@ -66,7 +66,7 @@ export const TextAreaForm = () => {
             initial={{ x: 50 }}
             animate={{ x: -12 }}
             transition={{
-              type: "spring",
+              type: "just",
             }}
           >
             <EditorOption

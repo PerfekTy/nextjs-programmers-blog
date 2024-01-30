@@ -53,14 +53,14 @@ export const Tags = ({ setTag }: { setTag: (tag: any) => void }) => {
   }, [tags]);
 
   return (
-    <div className="grid grid-cols-3 sm:flex sm:items-center sm:gap-3">
+    <div className="grid grid-cols-2 sm:flex sm:items-center sm:gap-3">
       {!loading ? (
         tags.map((tag, key) => (
           <Button
             variant="ghost"
             type="button"
             key={tag.tag}
-            className={`m-1 flex gap-2 border shadow hover:bg-[#e3e3e3] dark:hover:bg-[#262626] sm:m-0 ${
+            className={`m-1 flex gap-2 border text-sm shadow hover:bg-[#e3e3e3] dark:hover:bg-[#262626] sm:m-0 ${
               chosenTag[key] && chosenTag[key].selected
                 ? "bg-[#e3e3e3] dark:bg-[#262626]"
                 : "bg-transparent"
