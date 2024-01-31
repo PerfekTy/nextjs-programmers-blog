@@ -1,25 +1,10 @@
 import { motion } from "framer-motion";
 
 import { useRef, useState } from "react";
-import {
-  Bold,
-  Code,
-  Heading,
-  Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
-  Heading6,
-  Image,
-  Italic,
-  Link,
-  List,
-  ListOrdered,
-  QuoteIcon,
-} from "lucide-react";
+import { Heading } from "lucide-react";
 
-import { EditorOption } from "@/app/create/editor-option";
+import { textAreaButtons, textAreaHeadingButtons } from "./textarea-buttons";
+import { Button } from "@/components/ui/button";
 
 export const TextAreaForm = () => {
   const [areaText, setAreaText] = useState("");
@@ -55,11 +40,13 @@ export const TextAreaForm = () => {
   return (
     <>
       <div className="flex items-center gap-4 bg-[#f5f5f5] px-1 py-2 dark:bg-[#030303]">
-        <EditorOption
-          title="Headings"
-          icon={<Heading />}
+        <Button
+          type="button"
           onClick={() => setShowHeadings(!showHeadings)}
-        />
+          data-title="Headings"
+        >
+          <Heading />
+        </Button>
         {showHeadings!! && (
           <motion.div
             className="top-54 absolute -left-12 flex flex-col gap-2"
@@ -69,78 +56,40 @@ export const TextAreaForm = () => {
               type: "just",
             }}
           >
-            <EditorOption
-              title="Heading 1"
-              icon={<Heading1 />}
-              onClick={() => setCursorBetweenSymbols("# ", 0)}
-            />
-            <EditorOption
-              title="Heading 2"
-              icon={<Heading2 />}
-              onClick={() => setCursorBetweenSymbols("## ", 0)}
-            />
-            <EditorOption
-              title="Heading 3"
-              icon={<Heading3 />}
-              onClick={() => setCursorBetweenSymbols("### ", 0)}
-            />
-            <EditorOption
-              title="Heading 4"
-              icon={<Heading4 />}
-              onClick={() => setCursorBetweenSymbols("#### ", 0)}
-            />
-            <EditorOption
-              title="Heading 5"
-              icon={<Heading5 />}
-              onClick={() => setCursorBetweenSymbols("##### ", 0)}
-            />
-            <EditorOption
-              title="Heading 6"
-              icon={<Heading6 />}
-              onClick={() => setCursorBetweenSymbols("###### ", 0)}
-            />
+            {textAreaHeadingButtons.map((headingButton) => (
+              <Button
+                type="button"
+                variant="outline"
+                data-title={headingButton.title}
+                onClick={() =>
+                  setCursorBetweenSymbols(
+                    headingButton.symbol,
+                    headingButton.offset,
+                  )
+                }
+                key={headingButton.title}
+              >
+                {headingButton.icon}
+              </Button>
+            ))}
           </motion.div>
         )}
-        <EditorOption
-          title="Bold text"
-          icon={<Bold />}
-          onClick={() => setCursorBetweenSymbols("****", 2)}
-        />
-        <EditorOption
-          title="Italic text"
-          icon={<Italic />}
-          onClick={() => setCursorBetweenSymbols("**", 1)}
-        />
-        <EditorOption
-          title="Link text"
-          icon={<Link />}
-          onClick={() => setCursorBetweenSymbols("[](url)", 6)}
-        />
-        <EditorOption
-          title="Ordered list"
-          icon={<ListOrdered />}
-          onClick={() => setCursorBetweenSymbols("1. ", 0)}
-        />
-        <EditorOption
-          title="Unordered list"
-          icon={<List />}
-          onClick={() => setCursorBetweenSymbols("- ", 0)}
-        />
-        <EditorOption
-          title="Quote"
-          icon={<QuoteIcon />}
-          onClick={() => setCursorBetweenSymbols("> ", 0)}
-        />
-        <EditorOption
-          title="Block of code"
-          icon={<Code />}
-          onClick={() => setCursorBetweenSymbols("``", 1)}
-        />
-        <EditorOption
-          title="Image upload"
-          icon={<Image />}
-          onClick={() => setCursorBetweenSymbols("![](image_url)", 12)}
-        />
+        {textAreaButtons.map((textAreaButton) => (
+          <Button
+            type="button"
+            variant="outline"
+            data-title={textAreaButton.title}
+            onClick={() =>
+              setCursorBetweenSymbols(
+                textAreaButton.symbol,
+                textAreaButton.offset,
+              )
+            }
+            key={textAreaButton.title}
+          >
+            {textAreaButton.icon}
+          </Button>
+        ))}
       </div>
 
       <div className="px-5 md:px-10">
