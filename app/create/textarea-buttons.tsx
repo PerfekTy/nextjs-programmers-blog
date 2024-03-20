@@ -24,60 +24,80 @@ type textAreaButtonsT = {
 
 export const textAreaButtons: textAreaButtonsT = [
   {
-    title: "Bold text",
-    icon: <Bold />,
+    title: "Bold",
+    icon: <Bold size={22} />,
     symbol: "****",
     offset: 2,
   },
   {
-    title: "Italic text",
-    icon: <Italic />,
+    title: "Italic",
+    icon: <Italic size={22} />,
     symbol: "**",
     offset: 1,
   },
   {
-    title: "Link text",
-    icon: <Link />,
+    title: "Link",
+    icon: <Link size={22} />,
     symbol: "[](url)",
     offset: 6,
   },
   {
     title: "Ordered list",
-    icon: <ListOrdered />,
+    icon: <ListOrdered size={22} />,
     symbol: "1. ",
     offset: 0,
   },
   {
     title: "Unordered list",
-    icon: <List />,
+    icon: <List size={22} />,
     symbol: "- ",
     offset: 0,
   },
   {
     title: "Quote",
-    icon: <Quote />,
+    icon: <Quote size={22} />,
     symbol: "> ",
     offset: 0,
   },
   {
-    title: "Block of code",
-    icon: <Code />,
+    title: "Code",
+    icon: <Code size={22} />,
     symbol: "``````",
     offset: 3,
   },
   {
     title: "Image",
-    icon: <Image />,
+    icon: <Image size={22} />,
     symbol: "![](image_url)",
     offset: 12,
   },
 ];
 
 export const textAreaHeadingButtons: textAreaButtonsT = [
-  { title: "Heading1", icon: <Heading1 />, symbol: "#", offset: 0 },
-  { title: "Heading2", icon: <Heading2 />, symbol: "##", offset: 0 },
-  { title: "Heading3", icon: <Heading3 />, symbol: "###", offset: 0 },
-  { title: "Heading4", icon: <Heading4 />, symbol: "####", offset: 0 },
-  { title: "Heading5", icon: <Heading5 />, symbol: "#####", offset: 0 },
-  { title: "Heading6", icon: <Heading6 />, symbol: "######", offset: 0 },
+  { title: "Heading 1", icon: <Heading1 size={22} />, symbol: "#", offset: 0 },
+  { title: "Heading 2", icon: <Heading2 size={22} />, symbol: "##", offset: 0 },
+  {
+    title: "Heading 3",
+    icon: <Heading3 size={22} />,
+    symbol: "###",
+    offset: 0,
+  },
+  {
+    title: "Heading 4",
+    icon: <Heading4 size={22} />,
+    symbol: "####",
+    offset: 0,
+  },
+  {
+    title: "Heading 5",
+    icon: <Heading5 size={22} />,
+    symbol: "#####",
+    offset: 0,
+  },
+  {
+    title: "Heading 6",
+    icon: <Heading6 size={22} />,
+    symbol: "######",
+    offset: 0,
+  },
 ];
