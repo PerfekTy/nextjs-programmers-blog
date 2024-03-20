@@ -14,7 +14,7 @@ export const fetchSearchedArticles = async (
     .from(articles)
     .where(
       or(
-        arrayContains(articles.tags, [searchQuery]),
+        ilike(articles.tags, `%${searchQuery}%`),
         ilike(articles.title, `%${searchQuery}%`),
         ilike(articles.author, `%${searchQuery}%`),
       ),

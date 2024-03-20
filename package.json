@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db-push": "npx drizzle-kit push:pg",
-    "db-migrate": "npx drizzle-kit generate:pg",
-    "db-studio": "npx drizzle-kit studio"
+    "db:push": "npx drizzle-kit push:pg",
+    "db:migrate": "npx drizzle-kit generate:pg",
+    "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.1",

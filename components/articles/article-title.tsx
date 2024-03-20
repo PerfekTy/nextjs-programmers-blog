@@ -102,9 +102,9 @@ export const ArticleTitle = ({
                 {articles[0]?.title.replaceAll("-", " ")}
               </h1>
               <span className="flex gap-3 text-sm text-muted-foreground">
-                {articles[0]?.tags.map((tag: string) => (
+                {articles[0]?.tags.split(",").map((tag: string) => (
                   <p key={tag} className="cursor-pointer">
-                    #{tag}
+                    #{tag.trim()}
                   </p>
                 ))}
               </span>

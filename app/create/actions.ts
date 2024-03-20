@@ -4,41 +4,26 @@ import { db } from "@/db";
 import { articles } from "@/db/schema";
 import { currentUser } from "@clerk/nextjs";
 import { revalidatePath } from "next/cache";
+import type { Article } from "../utils/definitions";
 
-export type FormState = {
-  title: string;
-  tags: string | string[];
-  text: string;
-  errors: {
-    tags: string | undefined;
-    message: string | undefined;
-  };
-};
+type OmmitedArticle = Omit<
+  Article,
+  "id" | "createdAt" | "updatedAt" | "author" | "authorImage"
+>;
 
-export async function createArticleAction(
-  prevState: FormState,
-  formData: FormData,
-) {
+export async function createArticleAction(data: OmmitedArticle) {
   const user = await currentUser();
 
   if (!user) {
     throw new Error("You have to be signed in to add articles.");
   }
 
-  const article = {
-    title: formData.get("title") as string,
-    tags: formData.get("tags") as string,
-    text: formData.get("text") as string,
-  };
-
-  const tags = article.tags.split(",");
-
   try {
     await db.insert(articles).values({
-      tags,
+      title: data.title as string,
+      text: data.text as string,
+      tags: data.tags as string,
       author: user.username as string,
-      title: article.title.replaceAll(" ", "-"),
-      text: article.text as string,
       authorImage: user.imageUrl as string,
     });
 
@@ -47,14 +32,4 @@ export async function createArticleAction(
     console.log(error, "create, actions.ts");
     throw new Error("Database error: cannot add the article.");
   }
-
-  return {
-    title: "",
-    tags: "",
-    text: "",
-    errors: {
-      tags: undefined,
-      message: undefined,
-    },
-  };
 }

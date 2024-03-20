@@ -30,11 +30,12 @@ import { TagItemSkeleton } from "../skeletons";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeftFromLine } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { createArticleAction } from "./actions";
 
 const formSchema = z.object({
   title: z.string().min(2).max(50),
-  tags: z.string().min(2).max(20),
-  text: z.string().min(20),
+  tags: z.string().min(2),
+  text: z.string().min(2),
 });
 
 export default function CreateArticlePage() {
@@ -78,9 +79,9 @@ export default function CreateArticlePage() {
     }, 0);
   }
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    //TODO: Attach server action to create article
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await createArticleAction(values);
+    router.push("/");
   }
 
   return (
@@ -212,7 +213,7 @@ export const Tags = () => {
     <div className="flex flex-col flex-wrap gap-3">
       <h1>Available tags:</h1>
       {!loading ? (
-        tags.map((tag, key) => (
+        tags.map((tag) => (
           <Badge variant="outline" key={tag.tag} className="mb-5 w-fit p-2">
             <p>#{tag.tag}</p>
           </Badge>

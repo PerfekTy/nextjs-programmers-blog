@@ -1,5 +1,5 @@
 import { filteredArticlesByTags } from "@/app/utils/functions";
-import { TagPage } from "@/components/tags/tag-page";
+import { TagPage } from "@/app/(root)/tags/[tag]/tag-page";
 
 type TagsPageProps = {
   params: { tag: string };
@@ -13,7 +13,7 @@ export default async function ArticleTagPage({
   const searchQuery = searchParams?.searchQuery ?? "";
   const filteredArticles = await filteredArticlesByTags(
     searchQuery,
-    params.tag,
+    params.tag.replace("%20", ""),
   );
 
   return (

@@ -72,10 +72,8 @@ export const ArticleItem = ({ article }: { article: Article }) => {
             {article.title.replaceAll("-", " ")}
           </h1>
           <span className="flex gap-3 text-sm text-muted-foreground">
-            {article.tags.map((tag: string) => (
-              <p key={tag} className="cursor-pointer">
-                #{tag}
-              </p>
+            {article.tags.split(",").map((tag) => (
+              <p key={tag}>#{tag.trim()}</p>
             ))}
           </span>
           <text className={`${montserrat.className} line-clamp-3 text-[15px]`}>

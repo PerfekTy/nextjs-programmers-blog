@@ -60,7 +60,7 @@ export const TagPage = ({
         <h1 className="text-muted-foreground">
           {searchQuery ? "Search for: " : "Search for tag: "}
         </h1>
-        <p>{searchQuery ? searchQuery : "#" + tag}</p>
+        <p>{searchQuery ? searchQuery : "#" + tag.replace("%20", "")}</p>
       </span>
 
       {loadedTags?.map((article) => (
