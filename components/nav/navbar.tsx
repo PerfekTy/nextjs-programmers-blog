@@ -11,12 +11,14 @@ import { Spin } from "hamburger-react";
 import { UserButton, useAuth } from "@clerk/nextjs";
 
 export function Navbar({
-  isMobile,
-  setIsMobile,
-}: Readonly<{
-  isMobile: boolean;
-  setIsMobile: (isMobile: boolean) => void;
-}>) {
+  isDesktop,
+  isOpen,
+  setIsOpen,
+}: {
+  isDesktop: boolean;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+}) {
   const [isSearch, setIsSearch] = useState(false);
   const { push } = useRouter();
 
@@ -27,19 +29,18 @@ export function Navbar({
       <Logo />
       <div className="my-3 flex w-full items-center justify-center md:mr-0">
         <div className="flex items-center">
-          <div
+          <button
             className="ml-2 rounded-lg hover:bg-[#ebecfc] hover:text-[#2f3ab2] md:hidden"
-            onClick={() => setIsMobile(!isMobile)}
+            onClick={() => setIsOpen(!isOpen)}
           >
-            <Spin size={25} duration={0.5} toggled={isMobile} />
-          </div>
+            <Spin size={25} duration={0.5} toggled={isOpen} />
+          </button>
           <MotionButton
             content={<SearchIcon />}
             variant="ghost"
             onClick={() => setIsSearch(!isSearch)}
-            style={`${
-              isSearch && "dark:bg-button_active bg-button_active2"
-            } p-2 border md:hidden mx-2`}
+            style={`${isSearch && "dark:bg-button_active bg-button_active2"
+              } p-2 border md:hidden mx-2`}
           />
         </div>
         <div className="hidden w-full md:ml-5 md:block xl:ml-0">
@@ -75,9 +76,11 @@ export function Navbar({
           )}
         </div>
       </div>
-      <div className={`${isSearch ? "block" : "hidden"} w-full`}>
-        <SearchField />
-      </div>
-    </div>
+      {!isDesktop && isSearch &&
+        <div className="w-full" >
+          <SearchField />
+        </div>
+      }
+    </div >
   );
 }
