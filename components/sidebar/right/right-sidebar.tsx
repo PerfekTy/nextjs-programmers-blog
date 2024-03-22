@@ -17,8 +17,6 @@ export const RightSidebar = () => {
     dispatch(fetchTags());
   }, [dispatch]);
 
-  console.log(tags);
-
   return (
     <div className="mr-5 flex flex-col items-center justify-center xl:mr-0">
       <h2 className="w-full border-b-2 px-0 pb-1 pt-3 text-center text-2xl font-bold">
